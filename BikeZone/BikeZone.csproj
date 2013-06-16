@@ -32,6 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Npgsql">
       <HintPath>..\..\PI_projekt\Npgsql.dll</HintPath>
     </Reference>
@@ -47,16 +49,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Evidencija_Klijenata.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Evidencija_Klijenata.Designer.cs">
+      <DependentUpon>Evidencija_Klijenata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Evidencija_Dobavljaca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Evidencija_Dobavljaca.Designer.cs">
+      <DependentUpon>Evidencija_Dobavljaca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Evidencija_Usluga.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Evidencija_Usluga.Designer.cs">
+      <DependentUpon>Evidencija_Usluga.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Evidencija_Zaposlenika.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Evidencija_Zaposlenika.Designer.cs">
+      <DependentUpon>Evidencija_Zaposlenika.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Glavna_Forma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Glavna_Forma.Designer.cs">
+      <DependentUpon>Glavna_Forma.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Evidencija_Proizvoda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Evidencija_Proizvoda.Designer.cs">
+      <DependentUpon>Evidencija_Proizvoda.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Evidencija_Dobavljaca.resx">
+      <DependentUpon>Evidencija_Dobavljaca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Evidencija_Klijenata.resx">
+      <DependentUpon>Evidencija_Klijenata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Evidencija_Usluga.resx">
+      <DependentUpon>Evidencija_Usluga.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Evidencija_Zaposlenika.resx">
+      <DependentUpon>Evidencija_Zaposlenika.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Glavna_Forma.resx">
+      <DependentUpon>Glavna_Forma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -66,7 +110,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Evidencija_Proizvoda.resx">
+      <DependentUpon>Evidencija_Proizvoda.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -79,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Freeride_02_by_adnata.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
