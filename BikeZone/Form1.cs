@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Npgsql;
 
 namespace BikeZone
 {
-    public partial class Evidencija_Zaposlenika : Form
+    public partial class Form1 : Form
     {
-        public Evidencija_Zaposlenika()
+        public Form1()
         {
             InitializeComponent();
         }
