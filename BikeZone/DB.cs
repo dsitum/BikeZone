@@ -9,15 +9,15 @@ namespace BikeZone
 {
     class DB
     {
-        class BazaPodataka
+        class DB
         {
 
-            private static BazaPodataka instance;       
+            private static DB instance;       
   
             private NpgsqlConnection conn;
 
             #region Konstruktor
-            private BazaPodataka()
+            private DB()
             {
                 Konekcija = new NpgsqlConnection("Server=127.0.0.1;Port=5432;Database=BikeZone;User Id=postgres;Password=postgres;");
                 Konekcija.Open();
@@ -25,21 +25,21 @@ namespace BikeZone
             #endregion
 
             #region Destruktor
-            ~BazaPodataka()
+            ~DB()
             {
                 Konekcija.Close();
                 Konekcija = null;
             }
             #endregion
 
-            #region Singletone instanca
-            public static BazaPodataka Instance
+            #region Singletone Instanca
+            public static DB Instance
             {
                 get
                 {
                     if (instance == null)
                     {
-                        instance = new BazaPodataka();
+                        instance = new DB();
                     }
                     return instance;
                 }
@@ -61,7 +61,7 @@ namespace BikeZone
             /// <param name="sql"></param>
             /// Sql SELECT upit korisnika
             /// <returns>Kolekciju podataka iz baze ili prazan data reader</returns>
-            public NpgsqlDataReader DohvatiDataReader(string sql)
+            public NpgsqlDataReader dohvati_podatke(string sql)
             {
                 NpgsqlCommand naredba = new NpgsqlCommand(sql, Konekcija);
                 return naredba.ExecuteReader();
@@ -72,7 +72,7 @@ namespace BikeZone
             /// </summary>
             /// <param name="sql">sql upit</param>
             /// <returns>jedan objekt, odnosno jedan zapis iz baze</returns>
-            public object DohvatiJedanZapis(string sql)
+            public object dohvati_jedan_zapis(string sql)
             {
                 NpgsqlCommand naredba = new NpgsqlCommand(sql, Konekcija);
                 return naredba.ExecuteScalar();
@@ -83,7 +83,7 @@ namespace BikeZone
             /// </summary>
             /// <param name="sql">Upit kojeg je zadala druga forma</param>
             /// <returns></returns>
-            public int IzvrsiUpit(string sql)
+            public int izvrsi_upit(string sql)
             {
                 NpgsqlCommand naredba = new NpgsqlCommand(sql, Konekcija);
                 return naredba.ExecuteNonQuery();
