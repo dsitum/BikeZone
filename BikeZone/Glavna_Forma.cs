@@ -16,6 +16,7 @@ namespace BikeZone
         public Glavna_Forma()
         {
             InitializeComponent();
+            this.CenterToParent();
         }
 
         private void izlazToolStripMenuItem_Click(object sender, EventArgs e)

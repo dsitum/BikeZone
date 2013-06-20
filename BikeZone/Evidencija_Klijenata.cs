@@ -15,6 +15,7 @@ namespace BikeZone
         public Evidencija_Klijenata()
         {
             InitializeComponent();
+            this.CenterToParent();
         }
     }
 }

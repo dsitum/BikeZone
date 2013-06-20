@@ -15,7 +15,7 @@ namespace BikeZone
         public Evidencija_Proizvoda()
         {
             InitializeComponent();
-
+            this.CenterToParent();
             //postavljamo da se polje šifre ne može promijeniti (read-only)
             this.Sifra.ReadOnly = true;
         }

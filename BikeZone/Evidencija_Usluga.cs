@@ -15,6 +15,7 @@ namespace BikeZone
         public Evidencija_Usluga()
         {
             InitializeComponent();
+            this.CenterToParent();
         }
     }
 }
