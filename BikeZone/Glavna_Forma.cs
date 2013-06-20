@@ -13,7 +13,7 @@ namespace BikeZone
 {
     public partial class Glavna_Forma : Form
     {
-        public Glavna_Forma()
+        public Glavna_Forma(int idZaposlenika)
         {
             InitializeComponent();
             this.CenterToParent();
@@ -30,8 +30,7 @@ namespace BikeZone
 
         private void Unos_dijelova_Menu_Click(object sender, EventArgs e)
         {
-            //Unos_dijelova unos_dijelova = new Unos_dijelova();
-            //unos_dijelova.ShowDialog();
+
         }
 
         private void EvidencijaProizvoda_Menu_Click(object sender, EventArgs e)
@@ -63,9 +62,15 @@ namespace BikeZone
             evidencijaKlijenata.ShowDialog();
         }
 
-        private void EvidencijaZaposlenika_Menu_Click(object sender, EventArgs e)
+        private void dodajToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Evidencija_Zaposlenika evidencijaZaposlenika = new Evidencija_Zaposlenika();
+            Evidencija_Zaposlenika evidencijaZaposlenika = new Evidencija_Zaposlenika(false);
+            evidencijaZaposlenika.ShowDialog();
+        }
+
+        private void urediToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Evidencija_Zaposlenika evidencijaZaposlenika = new Evidencija_Zaposlenika(true);
             evidencijaZaposlenika.ShowDialog();
         }
     }

@@ -48,6 +48,8 @@
             this.primkaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomoćToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oTvrtki_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dodajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.urediToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,23 +149,25 @@
             // dobavljačaToolStripMenuItem1
             // 
             this.dobavljačaToolStripMenuItem1.Name = "dobavljačaToolStripMenuItem1";
-            this.dobavljačaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.dobavljačaToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
             this.dobavljačaToolStripMenuItem1.Text = "Dobavljača";
             this.dobavljačaToolStripMenuItem1.Click += new System.EventHandler(this.EvidencijaDobavljača_Menu_Click);
             // 
             // kupacaToolStripMenuItem1
             // 
             this.kupacaToolStripMenuItem1.Name = "kupacaToolStripMenuItem1";
-            this.kupacaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.kupacaToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
             this.kupacaToolStripMenuItem1.Text = "Kupaca";
             this.kupacaToolStripMenuItem1.Click += new System.EventHandler(this.EvidencijaKupaca_Menu_Click);
             // 
             // zaposlenikaToolStripMenuItem1
             // 
+            this.zaposlenikaToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dodajToolStripMenuItem,
+            this.urediToolStripMenuItem});
             this.zaposlenikaToolStripMenuItem1.Name = "zaposlenikaToolStripMenuItem1";
             this.zaposlenikaToolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
             this.zaposlenikaToolStripMenuItem1.Text = "Zaposlenika";
-            this.zaposlenikaToolStripMenuItem1.Click += new System.EventHandler(this.EvidencijaZaposlenika_Menu_Click);
             // 
             // izvještajToolStripMenuItem
             // 
@@ -200,6 +204,20 @@
             this.oTvrtki_MenuItem.Size = new System.Drawing.Size(113, 22);
             this.oTvrtki_MenuItem.Text = "&O tvrtki";
             this.oTvrtki_MenuItem.Click += new System.EventHandler(this.OTvrtki_Menu_Click);
+            // 
+            // dodajToolStripMenuItem
+            // 
+            this.dodajToolStripMenuItem.Name = "dodajToolStripMenuItem";
+            this.dodajToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dodajToolStripMenuItem.Text = "Dodaj";
+            this.dodajToolStripMenuItem.Click += new System.EventHandler(this.dodajToolStripMenuItem_Click);
+            // 
+            // urediToolStripMenuItem
+            // 
+            this.urediToolStripMenuItem.Name = "urediToolStripMenuItem";
+            this.urediToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.urediToolStripMenuItem.Text = "Uredi";
+            this.urediToolStripMenuItem.Click += new System.EventHandler(this.urediToolStripMenuItem_Click);
             // 
             // Glavna_Forma
             // 
@@ -241,6 +259,8 @@
         private System.Windows.Forms.ToolStripMenuItem backupRestoreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backupBazePodatakaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restoreBazePodatakaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dodajToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem urediToolStripMenuItem;
     }
 }
 

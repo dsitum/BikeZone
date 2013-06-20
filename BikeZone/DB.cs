@@ -9,9 +9,6 @@ namespace BikeZone
 {
     class DB
     {
-        class DB
-        {
-
             private static DB instance;       
   
             private NpgsqlConnection conn;
@@ -54,7 +51,6 @@ namespace BikeZone
             }
             #endregion
 
-            #region CRUD naredbe
             /// <summary>
             /// Napravi novi objekt za izvršavanje upita nad bazom, izvrši upit i vrati rezultate upita
             /// </summary>
@@ -68,17 +64,6 @@ namespace BikeZone
             }
 
             /// <summary>
-            /// Vrati samo jedan zapis iz baze
-            /// </summary>
-            /// <param name="sql">sql upit</param>
-            /// <returns>jedan objekt, odnosno jedan zapis iz baze</returns>
-            public object dohvati_jedan_zapis(string sql)
-            {
-                NpgsqlCommand naredba = new NpgsqlCommand(sql, Konekcija);
-                return naredba.ExecuteScalar();
-            }
-
-            /// <summary>
             /// izvrši drugi upit po želji  ( delete update, insert )
             /// </summary>
             /// <param name="sql">Upit kojeg je zadala druga forma</param>
@@ -88,7 +73,5 @@ namespace BikeZone
                 NpgsqlCommand naredba = new NpgsqlCommand(sql, Konekcija);
                 return naredba.ExecuteNonQuery();
             }
-            #endregion
         }
     }
-}
