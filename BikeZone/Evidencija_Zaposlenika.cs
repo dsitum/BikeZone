@@ -134,14 +134,34 @@ namespace BikeZone
             try
             {
                 if(dodaj_promijeni==true){
-                    upit = string.Format("UPDATE \"Zaposlenik\" SET \"korisnickoIme\"='{0}', lozinka='{1}', ime='{2}', prezime='{3}', telefon='{4}', email='{5}', placa='{6}'"
-                        + " WHERE \"idZaposlenika\"='{7}';",txtKorisnicko.Text, txtLozinka.Text, txtIme.Text,txtPrezime.Text,txtTelefon.Text,txtEmail.Text,txtPlaca.Text,
-                        id);
-                    MessageBox.Show(upit);
-                }
-                else{
+                    upit = string.Format("UPDATE \"Zaposlenici\" SET \"korisnickoIme\"='{0}', lozinka='{1}', ime='{2}', "
+                                        +"prezime='{3}', telefon='{4}', email='{5}', placa='{6}'"
+                                        + " WHERE \"idZaposlenika\"='{7}';"
+                                        ,txtKorisnicko.Text, txtLozinka.Text, txtIme.Text,txtPrezime.Text,txtTelefon.Text,txtEmail.Text,txtPlaca.Text,id);
 
                 }
+                else{
+                    upit = string.Format("INSERT INTO \"Zaposlenici\" VALUES(DEFAULT,'{0}','{1}','{2}', "
+                                        + "'{3}', '{4}', '{5}', '{6}'"
+                                        + ");"
+                                        , txtKorisnicko.Text, txtLozinka.Text, txtIme.Text, txtPrezime.Text, txtTelefon.Text, txtEmail.Text, txtPlaca.Text,id);
+                }
+                DB.Instance.izvrsi_upit(upit);
+
+                #region isprazni podatke unutar textboxova
+
+                txtKorisnicko.Text = "";
+                txtIme.Text = "";
+                txtEmail.Text = "";
+                txtLozinka.Text = "";
+                txtPlaca.Text = "";
+                txtPrezime.Text = "";
+                txtTelefon.Text = "";
+
+                #endregion
+
+                MessageBox.Show("Usješno ažuriran korisnik");
+                selektirajZaposlenike();
             }
             catch
             {
