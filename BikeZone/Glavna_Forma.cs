@@ -33,12 +33,6 @@ namespace BikeZone
 
         }
 
-        private void EvidencijaProizvoda_Menu_Click(object sender, EventArgs e)
-        {
-            Evidencija_Proizvoda evidencijaProizvoda = new Evidencija_Proizvoda();
-            evidencijaProizvoda.ShowDialog();
-        }
-
         private void EvidencijaUsluga_Menu_Click(object sender, EventArgs e)
         {
             Evidencija_Usluga evidencijaUsluga = new Evidencija_Usluga();
@@ -72,6 +66,18 @@ namespace BikeZone
         {
             Evidencija_Zaposlenika evidencijaZaposlenika = new Evidencija_Zaposlenika(true);
             evidencijaZaposlenika.ShowDialog();
+        }
+
+        private void urediToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Evidencija_Proizvoda evidencijaProizvoda = new Evidencija_Proizvoda(true);
+            evidencijaProizvoda.ShowDialog();
+        }
+
+        private void dodajToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Evidencija_Proizvoda evidencijaProizvoda = new Evidencija_Proizvoda(false);
+            evidencijaProizvoda.ShowDialog();
         }
     }
 }

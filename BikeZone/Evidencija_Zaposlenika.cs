@@ -9,14 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
+using System.Text.RegularExpressions;
 #endregion
 
 namespace BikeZone
 {
     public partial class Evidencija_Zaposlenika : Form
     {
-        private bool dodaj_promijeni;
         private string id;
+        private bool Dodaj_Promijeni { get; set; }
+
 
         /// <summary>
         /// 
@@ -26,9 +28,9 @@ namespace BikeZone
         {
             InitializeComponent();
             this.CenterToParent();
-            this.dodaj_promijeni = dodaj_promijeni;
+            Dodaj_Promijeni = dodaj_promijeni;
             selektirajZaposlenike();
-            if (dodaj_promijeni == false)
+            if (Dodaj_Promijeni == false)
             {
                 grpEvidencija.Text = "Dodaj zaposlenika";
             }
@@ -38,6 +40,9 @@ namespace BikeZone
             }
         }
 
+        /// <summary>
+        /// Ubaci zaposlenika u kontrole kako bi ga mogao editirati
+        /// </summary>
         private void upisi_zaposlenika_u_kontrole()
         {
             if (dataGridView1.Rows.Count == 1)
@@ -62,6 +67,9 @@ namespace BikeZone
             }
         }
 
+        /// <summary>
+        /// ubaci sve zaposlenike u datagridview
+        /// </summary>
         private void selektirajZaposlenike()
         {
             string upit = string.Format("SELECT*FROM \"Zaposlenici\";");
@@ -73,6 +81,11 @@ namespace BikeZone
             }
         }
 
+        /// <summary>
+        /// Briši zaposlenika
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnObrisi_Click(object sender, EventArgs e)
         {
             if (dataGridView1.Rows.Count == 1)
@@ -87,13 +100,20 @@ namespace BikeZone
                 DB.Instance.izvrsi_upit(upit);
                 MessageBox.Show("Uspješno obrisan zaposlenik!");
                 selektirajZaposlenike();
-                if (dodaj_promijeni == true)
+                if (Dodaj_Promijeni == true)
                 {
                     upisi_zaposlenika_u_kontrole();
                 }
             }
         }
 
+
+        /// <summary>
+        /// Napravi evidenciju, prvo provjeri upis podataka, zatim provjeri radi li se o upisu ili promjeni podataka.
+        /// Nakon svega izvrši upit u bazi
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEvidentiraj_Click(object sender, EventArgs e)
         {
             #region Provjera jesu li pravilno upisani podaci
@@ -133,7 +153,7 @@ namespace BikeZone
 
             try
             {
-                if(dodaj_promijeni==true){
+                if(Dodaj_Promijeni==true){
                     upit = string.Format("UPDATE \"Zaposlenici\" SET \"korisnickoIme\"='{0}', lozinka='{1}', ime='{2}', "
                                         +"prezime='{3}', telefon='{4}', email='{5}', placa='{6}'"
                                         + " WHERE \"idZaposlenika\"='{7}';"
@@ -169,9 +189,14 @@ namespace BikeZone
             }
         }
 
+        /// <summary>
+        /// U slučaju da se radi o uređivanju podataka, onda ako se selektira drugi zaposlenik, kontrole se popune s podacima
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dodaj_promijeni == true)
+            if (Dodaj_Promijeni == true)
             {
                 upisi_zaposlenika_u_kontrole();
             }
