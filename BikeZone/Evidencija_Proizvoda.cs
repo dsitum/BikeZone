@@ -93,7 +93,7 @@ namespace BikeZone
 
             #region provjeri podatke u tekstualnim okvirima
 
-            Regex reg = new Regex("[0-9]{4,4}$");
+            Regex reg = new Regex("^[0-9]{4,4}$");
 
             if (!reg.IsMatch(txtGodina.Text))
             {
@@ -144,7 +144,7 @@ namespace BikeZone
                 }
                 else
                 {
-                    upit = "INSERT INTO \"PopravciDijeloviBicikli\" VALUES(DEFAULT);";
+                    upit = "INSERT INTO \"PopravciDijeloviBicikli\" VALUES(DEFAULT,'D');";
                     DB.Instance.izvrsi_upit(upit);
 
                     upit = "SELECT MAX(id) FROM \"PopravciDijeloviBicikli\";";
@@ -295,6 +295,62 @@ namespace BikeZone
             if (Dodaj_Promijeni == true)
             {
                 upisi_proizvod_u_kontrole();
+                int indeks = dataGridView1.CurrentCell.RowIndex;
+                picSlika.ImageLocation = @"..\..\Slike/Proizvodi/" + dataGridView1.Rows[indeks].Cells[0].Value.ToString() + ".jpg";
+            }
+        }
+        
+
+        private void btnUcitajSliku_Click(object sender, EventArgs e)
+        {
+            var FD = new System.Windows.Forms.OpenFileDialog();
+            if (FD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string upit = "SELECT MAX(id)+1 FROM \"PopravciDijeloviBicikli\";";
+                string id = "";
+                using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
+                {
+                    while (dr.Read())
+                    {
+                        id = dr[0].ToString();
+                    }
+                }
+                string fileToOpen = FD.FileName;
+                if (Dodaj_Promijeni == false)
+                {
+                    try
+                    {
+                        System.IO.File.Delete(@"..\..\Slike/Proizvodi/" + (id).ToString() + ".jpg");
+                    }
+                    catch
+                    {
+
+                    }
+                    System.IO.File.Copy(FD.FileName, @"..\..\Slike/Proizvodi/" + (id).ToString() + ".jpg");
+                    picSlika.ImageLocation=@"..\..\Slike/Proizvodi/"+(id).ToString()+".jpg";
+                }
+                else
+                {
+                    try
+                    {
+                        int indeks = dataGridView1.CurrentCell.RowIndex;
+                        try
+                        {
+                            System.IO.File.Delete(@"..\..\Slike/Proizvodi/" + dataGridView1.Rows[indeks].Cells[0].Value.ToString() + ".jpg");
+                        }
+                        catch
+                        {
+
+                        }
+                        System.IO.File.Copy(FD.FileName, @"..\..\Slike/Proizvodi/" + dataGridView1.Rows[indeks].Cells[0].Value.ToString() + ".jpg");
+                        picSlika.ImageLocation = @"..\..\Slike/Proizvodi/" + dataGridView1.Rows[indeks].Cells[0].Value.ToString() + ".jpg";
+                    }
+                    catch
+                    {
+
+                    }
+                }        
+                MessageBox.Show("Uspješno pohranjena slika");
             }
         }
     }

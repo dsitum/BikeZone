@@ -48,6 +48,7 @@
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnUcitajSliku = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCijena = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picSlika)).BeginInit();
@@ -139,9 +140,11 @@
             // 
             // picSlika
             // 
+            this.picSlika.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.picSlika.Location = new System.Drawing.Point(652, 19);
             this.picSlika.Name = "picSlika";
             this.picSlika.Size = new System.Drawing.Size(312, 248);
+            this.picSlika.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picSlika.TabIndex = 7;
             this.picSlika.TabStop = false;
             // 
@@ -224,6 +227,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnUcitajSliku);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtCijena);
             this.groupBox1.Controls.Add(this.txtNaziv);
@@ -246,6 +250,16 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // btnUcitajSliku
+            // 
+            this.btnUcitajSliku.Location = new System.Drawing.Point(768, 273);
+            this.btnUcitajSliku.Name = "btnUcitajSliku";
+            this.btnUcitajSliku.Size = new System.Drawing.Size(75, 23);
+            this.btnUcitajSliku.TabIndex = 13;
+            this.btnUcitajSliku.Text = "Učitaj sliku";
+            this.btnUcitajSliku.UseVisualStyleBackColor = true;
+            this.btnUcitajSliku.Click += new System.EventHandler(this.btnUcitajSliku_Click);
             // 
             // label1
             // 
@@ -311,5 +325,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCijena;
+        private System.Windows.Forms.Button btnUcitajSliku;
     }
 }

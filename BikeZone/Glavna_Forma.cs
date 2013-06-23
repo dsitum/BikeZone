@@ -110,10 +110,42 @@ namespace BikeZone
             if (cmd != null)
             {
                 cmd.StandardInput.WriteLine(@"cd C:\Program Files\PostgreSQL\9.2\bin");
-                cmd.StandardInput.WriteLine(@"pg_dump -U postgres -C -f C:\Program Files\PostgreSQL\BikeZone___" + DateTime.Today.ToShortDateString() + ".dump BikeZone");
+                cmd.StandardInput.WriteLine(@"pg_dump -U BikeZone -C -f C:\Program Files\PostgreSQL\BikeZone___" + DateTime.Today.ToShortDateString() + ".dump BikeZone");
                 cmd.StandardInput.Close();
             }
-            MessageBox.Show(@"Uspješno napravljen backup, nalazi se na C:\Program Files\PostgreSQL\9.2\bin");
+            MessageBox.Show(@"Uspješno napravljen backup, nalazi se na C:\Program Files\PostgreSQL\BikeZone");
+        }
+
+        private void restoreBazePodatakaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+             var FD = new System.Windows.Forms.OpenFileDialog();
+             if (FD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+             {
+                 try
+                 {
+                     System.Diagnostics.Process cmd = new System.Diagnostics.Process();
+                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                     startInfo.FileName = "cmd.exe";
+                     cmd.StartInfo.RedirectStandardInput = true;
+                     cmd.StartInfo.RedirectStandardOutput = true;
+                     startInfo.RedirectStandardInput = true;
+                     startInfo.RedirectStandardOutput = true;
+                     startInfo.UseShellExecute = false;
+                     cmd.StartInfo = startInfo;
+                     cmd.Start();
+                     if (cmd != null)
+                     {
+                         cmd.StandardInput.WriteLine(@"cd C:\Program Files\PostgreSQL\9.2\bin");
+                         cmd.StandardInput.WriteLine(@"psql -U BikeZone -C -f "+ FD.FileName +"BikeZone3");
+                         cmd.StandardInput.Close();
+                     }
+                     MessageBox.Show(@"Uspješno napravljen restore!");
+                 }
+                 catch
+                 {
+                     MessageBox.Show("Nije uspješno napravljen restore!");
+                 }
+             }
         }
     }
 }
