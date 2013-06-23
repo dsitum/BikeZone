@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -19,6 +20,7 @@ namespace BikeZone
     {
         private bool Dodaj_Promijeni { get; set; }
         private string id { get; set; }
+
         /// <summary>
         /// Upiši podatke u datagrid 
         /// </summary>
@@ -79,19 +81,99 @@ namespace BikeZone
 
 
         /// <summary>
-        /// 
+        /// Kad se klikne evidentiraj,
+        /// prvo se provjeri jesu li svi podaci uneseni u kontrole ispravno,
+        /// zatim se provjeri radi li se o insert ili update upitu, pa se prema tome generira sql
+        /// napravi se upit i refreshaju se podaci u datagridu
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Dodaj_Promijeni == true)
-            {
 
+            #region provjeri podatke u tekstualnim okvirima
+
+            Regex reg = new Regex("[0-9]{4,4}$");
+
+            if (!reg.IsMatch(txtGodina.Text))
+            {
+                MessageBox.Show("Krivo ste unijeli godinu!");
             }
+            else if (txtGodina.Text == "")
+            {
+                MessageBox.Show("Morate unijeti godinu");
+            }
+            else if (txtCijena.Text == "")
+            {
+                MessageBox.Show("Morate unijeti cijenu");
+            }
+            else if (txtKolicina.Text == "")
+            {
+                MessageBox.Show("Morate unijeti količinu");
+            }
+            else if (txtMinKolicina.Text == "")
+            {
+                MessageBox.Show("Morate unijeti minimalnu količinu");
+            }
+            else if (txtNaziv.Text == "")
+            {
+                MessageBox.Show("Morate unijeti naziv");
+            }
+
+            #endregion
+
             else
             {
+                string upit = "";
+                string id_tip = "";
+                foreach (char c in cmbTip.Text)
+                {
+                    if (c == ' ') break;
+                    else
+                    {
+                        id_tip += c;
+                    }
+                }
+                if (Dodaj_Promijeni == true)
+                {
 
+                    int indeks = dataGridView1.CurrentCell.RowIndex;
+                    upit = string.Format("UPDATE \"DijeloviBicikli\" SET naziv='{0}', \"idTipa\"='{1}',\"godinaProizvodnje\"='{2}',"
+                                       + "kolicina='{3}',\"minimalnaKolicina\"='{4}',cijena='{5}' WHERE \"idDijelaBicikla\"='{6}';"
+                                       , txtNaziv.Text, id_tip, txtGodina.Text, txtKolicina.Text, txtMinKolicina.Text, txtCijena.Text, dataGridView1.Rows[indeks].Cells[0].Value.ToString());
+                }
+                else
+                {
+                    upit = "INSERT INTO \"PopravciDijeloviBicikli\" VALUES(DEFAULT);";
+                    DB.Instance.izvrsi_upit(upit);
+
+                    upit = "SELECT MAX(id) FROM \"PopravciDijeloviBicikli\";";
+                    string id = "";
+                    using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
+                    {
+                        while (dr.Read())
+                        {
+                            id = dr[0].ToString();
+                        }
+                    }
+                    upit = string.Format("INSERT INTO \"DijeloviBicikli\" VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}');",
+                                        txtNaziv.Text, id_tip, txtGodina.Text, txtKolicina.Text, txtMinKolicina.Text, txtCijena.Text, id);
+                }
+
+                DB.Instance.izvrsi_upit(upit);
+
+                #region isprazni kontrole
+
+                txtCijena.Text = "";
+                txtGodina.Text = "";
+                txtKolicina.Text = "";
+                txtMinKolicina.Text = "";
+                txtNaziv.Text = "";
+
+                #endregion
+
+                MessageBox.Show("Uspješno izvršen upit");
+                selektiraj_proizvode();
             }
         }
 
@@ -144,14 +226,14 @@ namespace BikeZone
             }
             else
             {
-                upit = "SELECT naziv FROM \"TipDijelaBicikla\" WHERE bicikl=false;";
+                upit = "SELECT \"idTipa\",naziv FROM \"TipDijelaBicikla\" WHERE bicikl=false;";
             }
             using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
             {
                 cmbTip.Items.Clear();
                 while (dr.Read())
                 {
-                    cmbTip.Items.Add(dr["naziv"].ToString());
+                    cmbTip.Items.Add(dr["idTipa"].ToString() + " " + dr["naziv"].ToString());
                 }
                 cmbTip.SelectedIndex = 0;
             }
