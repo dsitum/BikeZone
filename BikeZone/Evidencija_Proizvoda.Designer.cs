@@ -48,8 +48,8 @@
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtCijena = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtCijena = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picSlika)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -58,7 +58,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(84, 38);
+            this.label2.Location = new System.Drawing.Point(85, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 2;
@@ -66,7 +66,7 @@
             // 
             // txtNaziv
             // 
-            this.txtNaziv.Location = new System.Drawing.Point(127, 35);
+            this.txtNaziv.Location = new System.Drawing.Point(128, 30);
             this.txtNaziv.Multiline = true;
             this.txtNaziv.Name = "txtNaziv";
             this.txtNaziv.Size = new System.Drawing.Size(184, 75);
@@ -74,7 +74,7 @@
             // 
             // txtGodina
             // 
-            this.txtGodina.Location = new System.Drawing.Point(127, 132);
+            this.txtGodina.Location = new System.Drawing.Point(128, 127);
             this.txtGodina.Name = "txtGodina";
             this.txtGodina.Size = new System.Drawing.Size(40, 20);
             this.txtGodina.TabIndex = 4;
@@ -82,7 +82,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 132);
+            this.label3.Location = new System.Drawing.Point(20, 127);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(102, 13);
             this.label3.TabIndex = 5;
@@ -91,7 +91,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 167);
+            this.label4.Location = new System.Drawing.Point(16, 162);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(106, 13);
             this.label4.TabIndex = 5;
@@ -99,14 +99,14 @@
             // 
             // txtKolicina
             // 
-            this.txtKolicina.Location = new System.Drawing.Point(127, 167);
+            this.txtKolicina.Location = new System.Drawing.Point(128, 162);
             this.txtKolicina.Name = "txtKolicina";
             this.txtKolicina.Size = new System.Drawing.Size(40, 20);
             this.txtKolicina.TabIndex = 4;
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(28, 193);
+            this.label5.Location = new System.Drawing.Point(29, 188);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 27);
             this.label5.TabIndex = 5;
@@ -114,7 +114,7 @@
             // 
             // txtMinKolicina
             // 
-            this.txtMinKolicina.Location = new System.Drawing.Point(127, 200);
+            this.txtMinKolicina.Location = new System.Drawing.Point(128, 195);
             this.txtMinKolicina.Name = "txtMinKolicina";
             this.txtMinKolicina.Size = new System.Drawing.Size(40, 20);
             this.txtMinKolicina.TabIndex = 4;
@@ -123,7 +123,7 @@
             // 
             this.cmbTip.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTip.FormattingEnabled = true;
-            this.cmbTip.Location = new System.Drawing.Point(127, 251);
+            this.cmbTip.Location = new System.Drawing.Point(128, 246);
             this.cmbTip.Name = "cmbTip";
             this.cmbTip.Size = new System.Drawing.Size(184, 21);
             this.cmbTip.TabIndex = 6;
@@ -131,7 +131,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(28, 254);
+            this.label6.Location = new System.Drawing.Point(29, 249);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(93, 13);
             this.label6.TabIndex = 2;
@@ -139,16 +139,16 @@
             // 
             // picSlika
             // 
-            this.picSlika.Location = new System.Drawing.Point(413, 63);
+            this.picSlika.Location = new System.Drawing.Point(652, 19);
             this.picSlika.Name = "picSlika";
-            this.picSlika.Size = new System.Drawing.Size(206, 179);
+            this.picSlika.Size = new System.Drawing.Size(312, 248);
             this.picSlika.TabIndex = 7;
             this.picSlika.TabStop = false;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(504, 47);
+            this.label7.Location = new System.Drawing.Point(602, 139);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(30, 13);
             this.label7.TabIndex = 1;
@@ -157,20 +157,22 @@
             // chkBicikl
             // 
             this.chkBicikl.AutoSize = true;
-            this.chkBicikl.Location = new System.Drawing.Point(127, 228);
+            this.chkBicikl.Location = new System.Drawing.Point(128, 223);
             this.chkBicikl.Name = "chkBicikl";
             this.chkBicikl.Size = new System.Drawing.Size(57, 17);
             this.chkBicikl.TabIndex = 8;
             this.chkBicikl.Text = "Bicikl?";
             this.chkBicikl.UseVisualStyleBackColor = true;
+            this.chkBicikl.CheckedChanged += new System.EventHandler(this.chkBicikl_CheckedChanged);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 390);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(652, 239);
+            this.dataGridView1.Size = new System.Drawing.Size(989, 239);
             this.dataGridView1.TabIndex = 9;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // label8
             // 
@@ -183,7 +185,7 @@
             // 
             // btnEvidentiraj
             // 
-            this.btnEvidentiraj.Location = new System.Drawing.Point(491, 283);
+            this.btnEvidentiraj.Location = new System.Drawing.Point(420, 283);
             this.btnEvidentiraj.Name = "btnEvidentiraj";
             this.btnEvidentiraj.Size = new System.Drawing.Size(75, 23);
             this.btnEvidentiraj.TabIndex = 10;
@@ -193,7 +195,7 @@
             // 
             // btnObrisi
             // 
-            this.btnObrisi.Location = new System.Drawing.Point(546, 361);
+            this.btnObrisi.Location = new System.Drawing.Point(901, 361);
             this.btnObrisi.Name = "btnObrisi";
             this.btnObrisi.Size = new System.Drawing.Size(75, 23);
             this.btnObrisi.TabIndex = 11;
@@ -208,7 +210,7 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(676, 641);
+            this.shapeContainer1.Size = new System.Drawing.Size(1013, 641);
             this.shapeContainer1.TabIndex = 12;
             this.shapeContainer1.TabStop = false;
             // 
@@ -216,7 +218,7 @@
             // 
             this.lineShape1.Name = "lineShape1";
             this.lineShape1.X1 = -7;
-            this.lineShape1.X2 = 675;
+            this.lineShape1.X2 = 1005;
             this.lineShape1.Y1 = 349;
             this.lineShape1.Y2 = 349;
             // 
@@ -240,32 +242,32 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(652, 312);
+            this.groupBox1.Size = new System.Drawing.Size(989, 312);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
-            // txtCijena
-            // 
-            this.txtCijena.Location = new System.Drawing.Point(127, 283);
-            this.txtCijena.Name = "txtCijena";
-            this.txtCijena.Size = new System.Drawing.Size(100, 20);
-            this.txtCijena.TabIndex = 11;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(82, 288);
+            this.label1.Location = new System.Drawing.Point(83, 283);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 12;
             this.label1.Text = "Cijena:";
             // 
+            // txtCijena
+            // 
+            this.txtCijena.Location = new System.Drawing.Point(128, 278);
+            this.txtCijena.Name = "txtCijena";
+            this.txtCijena.Size = new System.Drawing.Size(100, 20);
+            this.txtCijena.TabIndex = 11;
+            // 
             // Evidencija_Proizvoda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 641);
+            this.ClientSize = new System.Drawing.Size(1013, 641);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnObrisi);
             this.Controls.Add(this.dataGridView1);

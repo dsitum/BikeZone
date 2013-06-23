@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
+using System.Threading;
 
 namespace BikeZone
 {
@@ -78,6 +79,41 @@ namespace BikeZone
         {
             Evidencija_Proizvoda evidencijaProizvoda = new Evidencija_Proizvoda(false);
             evidencijaProizvoda.ShowDialog();
+        }
+
+        private void backupBazePodatakaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Thread dretva = new Thread(new ThreadStart(BackupBaze));
+            dretva.Start();
+            try
+            {
+                BackupBaze();
+            }
+            catch
+            {
+                MessageBox.Show("Nije uspješno napravljen backup!");
+            }
+        }
+
+        private static void BackupBaze()
+        {
+            System.Diagnostics.Process cmd = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardInput = true;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.UseShellExecute = false;
+            cmd.StartInfo = startInfo;
+            cmd.Start();
+            if (cmd != null)
+            {
+                cmd.StandardInput.WriteLine(@"cd C:\Program Files\PostgreSQL\9.2\bin");
+                cmd.StandardInput.WriteLine(@"pg_dump -U postgres -C -f C:\Program Files\PostgreSQL\BikeZone___" + DateTime.Today.ToShortDateString() + ".dump BikeZone");
+                cmd.StandardInput.Close();
+            }
+            MessageBox.Show(@"Uspješno napravljen backup, nalazi se na C:\Program Files\PostgreSQL\9.2\bin");
         }
     }
 }
