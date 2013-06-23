@@ -53,8 +53,7 @@ namespace BikeZone
 
         private void EvidencijaKupaca_Menu_Click(object sender, EventArgs e)
         {
-            Evidencija_Klijenata evidencijaKlijenata = new Evidencija_Klijenata();
-            evidencijaKlijenata.ShowDialog();
+
         }
 
         private void dodajToolStripMenuItem_Click(object sender, EventArgs e)
@@ -152,6 +151,18 @@ namespace BikeZone
                     MessageBox.Show("Nije uspješno napravljen restore!");
                 }
             }
+        }
+
+        private void dodajToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Evidencija_Klijenata evidencijaKlijenata = new Evidencija_Klijenata(false);
+            evidencijaKlijenata.ShowDialog();
+        }
+
+        private void urediToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Evidencija_Klijenata evidencijaKlijenata = new Evidencija_Klijenata(true);
+            evidencijaKlijenata.ShowDialog();
         }
     }
 }

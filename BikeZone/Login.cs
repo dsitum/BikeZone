@@ -19,6 +19,7 @@ namespace BikeZone
         {
             InitializeComponent();
             this.CenterToScreen();
+            this.AcceptButton = btnLogin;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

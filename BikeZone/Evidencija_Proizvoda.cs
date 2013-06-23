@@ -50,9 +50,11 @@ namespace BikeZone
         /// </summary>
         private void selektiraj_proizvode()
         {
-            string upit = string.Format("SELECT \"idDijelaBicikla\", \"DijeloviBicikli\".naziv, \"TipDijelaBicikla\".naziv AS \"Tip dijela\",\"TipDijelaBicikla\".bicikl, \"godinaProizvodnje\","
-                                        +" kolicina, \"minimalnaKolicina\", cijena FROM \"DijeloviBicikli\" JOIN \"TipDijelaBicikla\" ON \"DijeloviBicikli\".\"idTipa\"="
-                                        +"\"TipDijelaBicikla\".\"idTipa\";");
+            string upit = string.Format("SELECT \"DijeloviBicikli\".\"idDijelaBicikla\", \"DijeloviBicikli\".naziv, "
+                                        +"\"TipDijelaBicikla\".naziv AS \"Tip dijela\",\"TipDijelaBicikla\".bicikl, \"godinaProizvodnje\","
+                                        +" kolicina, \"minimalnaKolicina\", cijena FROM \"DijeloviBicikli\" JOIN \"TipDijelaBicikla\" "
+                                        +"ON \"DijeloviBicikli\".\"idTipa\"=\"TipDijelaBicikla\".\"idTipa\" JOIN \"PopravciDijeloviBicikli\" ON "
+                                        +"\"PopravciDijeloviBicikli\".\"id\"=\"DijeloviBicikli\".\"idDijelaBicikla\" AND popravci_ili_dijelovibicikli='D';");
             using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
             {
                 DataTable dt = new DataTable();
@@ -139,12 +141,16 @@ namespace BikeZone
 
                     int indeks = dataGridView1.CurrentCell.RowIndex;
                     upit = string.Format("UPDATE \"DijeloviBicikli\" SET naziv='{0}', \"idTipa\"='{1}',\"godinaProizvodnje\"='{2}',"
-                                       + "kolicina='{3}',\"minimalnaKolicina\"='{4}',cijena='{5}' WHERE \"idDijelaBicikla\"='{6}';"
-                                       , txtNaziv.Text, id_tip, txtGodina.Text, txtKolicina.Text, txtMinKolicina.Text, txtCijena.Text, dataGridView1.Rows[indeks].Cells[0].Value.ToString());
+                                       + "kolicina='{3}',\"minimalnaKolicina\"='{4}' WHERE \"idDijelaBicikla\"='{5}';"
+                                       , txtNaziv.Text, id_tip, txtGodina.Text, txtKolicina.Text, txtMinKolicina.Text,  dataGridView1.Rows[indeks].Cells[0].Value.ToString());
+                    DB.Instance.izvrsi_upit(upit);
+                    upit=string.Format("UPDATE \"PopravciDijeloviBicikli\" SET cijena='{0}' WHERE \"id\"='{1}';"
+                                        ,txtCijena.Text,dataGridView1.Rows[indeks].Cells[0].Value.ToString());
+                    
                 }
                 else
                 {
-                    upit = "INSERT INTO \"PopravciDijeloviBicikli\" VALUES(DEFAULT,'D');";
+                    upit = string.Format("INSERT INTO \"PopravciDijeloviBicikli\" VALUES(DEFAULT,'D','{0}');",txtCijena.Text);
                     DB.Instance.izvrsi_upit(upit);
 
                     upit = "SELECT MAX(id) FROM \"PopravciDijeloviBicikli\";";
@@ -156,12 +162,12 @@ namespace BikeZone
                             id = dr[0].ToString();
                         }
                     }
-                    upit = string.Format("INSERT INTO \"DijeloviBicikli\" VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}');",
-                                        txtNaziv.Text, id_tip, txtGodina.Text, txtKolicina.Text, txtMinKolicina.Text, txtCijena.Text, id);
+                    upit = string.Format("INSERT INTO \"DijeloviBicikli\" VALUES('{0}','{1}','{2}','{3}','{4}','{5}');",
+                                        txtNaziv.Text, id_tip, txtGodina.Text, txtKolicina.Text, txtMinKolicina.Text,  id);
                 }
 
-                DB.Instance.izvrsi_upit(upit);
 
+                DB.Instance.izvrsi_upit(upit);
                 #region isprazni kontrole
 
                 txtCijena.Text = "";
@@ -292,11 +298,18 @@ namespace BikeZone
         /// <param name="e"></param>
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (Dodaj_Promijeni == true)
+            try
             {
-                upisi_proizvod_u_kontrole();
-                int indeks = dataGridView1.CurrentCell.RowIndex;
-                picSlika.ImageLocation = @"..\..\Slike/Proizvodi/" + dataGridView1.Rows[indeks].Cells[0].Value.ToString() + ".jpg";
+                if (Dodaj_Promijeni == true)
+                {
+                    upisi_proizvod_u_kontrole();
+                    int indeks = dataGridView1.CurrentCell.RowIndex;
+                    picSlika.ImageLocation = @"..\..\Slike/Proizvodi/" + dataGridView1.Rows[indeks].Cells[0].Value.ToString() + ".jpg";
+                }
+            }
+            catch
+            {
+
             }
         }
         

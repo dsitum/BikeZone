@@ -29,79 +29,65 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtIme = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtPrezime = new System.Windows.Forms.TextBox();
+            this.txtTelefon = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnEvidentiraj = new System.Windows.Forms.Button();
+            this.btnBrisi = new System.Windows.Forms.Button();
+            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.grpDodajPromijeni = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.grpDodajPromijeni.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 13);
+            this.label1.Location = new System.Drawing.Point(9, 198);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Popis kupaca:";
             // 
-            // label2
+            // txtIme
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(471, 34);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Šifra:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(508, 31);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(508, 57);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(128, 20);
-            this.textBox2.TabIndex = 3;
+            this.txtIme.Location = new System.Drawing.Point(191, 29);
+            this.txtIme.Name = "txtIme";
+            this.txtIme.Size = new System.Drawing.Size(128, 20);
+            this.txtIme.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(475, 60);
+            this.label3.Location = new System.Drawing.Point(158, 32);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Ime:";
             // 
-            // textBox3
+            // txtPrezime
             // 
-            this.textBox3.Location = new System.Drawing.Point(508, 84);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(128, 20);
-            this.textBox3.TabIndex = 4;
+            this.txtPrezime.Location = new System.Drawing.Point(191, 56);
+            this.txtPrezime.Name = "txtPrezime";
+            this.txtPrezime.Size = new System.Drawing.Size(128, 20);
+            this.txtPrezime.TabIndex = 4;
             // 
-            // textBox4
+            // txtTelefon
             // 
-            this.textBox4.Location = new System.Drawing.Point(508, 111);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 5;
+            this.txtTelefon.Location = new System.Drawing.Point(191, 83);
+            this.txtTelefon.Name = "txtTelefon";
+            this.txtTelefon.Size = new System.Drawing.Size(128, 20);
+            this.txtTelefon.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(456, 87);
+            this.label4.Location = new System.Drawing.Point(139, 59);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 1;
@@ -110,7 +96,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(456, 114);
+            this.label5.Location = new System.Drawing.Point(139, 86);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 13);
             this.label5.TabIndex = 1;
@@ -119,50 +105,85 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 29);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 224);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(419, 222);
+            this.dataGridView1.Size = new System.Drawing.Size(476, 237);
             this.dataGridView1.TabIndex = 6;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
-            // button1
+            // btnEvidentiraj
             // 
-            this.button1.Location = new System.Drawing.Point(480, 159);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Evidentiraj";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnEvidentiraj.Location = new System.Drawing.Point(213, 123);
+            this.btnEvidentiraj.Name = "btnEvidentiraj";
+            this.btnEvidentiraj.Size = new System.Drawing.Size(75, 23);
+            this.btnEvidentiraj.TabIndex = 7;
+            this.btnEvidentiraj.Text = "Evidentiraj";
+            this.btnEvidentiraj.UseVisualStyleBackColor = true;
+            this.btnEvidentiraj.Click += new System.EventHandler(this.btnEvidentiraj_Click);
             // 
-            // button2
+            // btnBrisi
             // 
-            this.button2.Location = new System.Drawing.Point(561, 159);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Obriši";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnBrisi.Location = new System.Drawing.Point(371, 195);
+            this.btnBrisi.Name = "btnBrisi";
+            this.btnBrisi.Size = new System.Drawing.Size(75, 23);
+            this.btnBrisi.TabIndex = 8;
+            this.btnBrisi.Text = "Obriši";
+            this.btnBrisi.UseVisualStyleBackColor = true;
+            this.btnBrisi.Click += new System.EventHandler(this.btnBrisi_Click);
+            // 
+            // lineShape1
+            // 
+            this.lineShape1.Name = "lineShape1";
+            this.lineShape1.X1 = 9;
+            this.lineShape1.X2 = 498;
+            this.lineShape1.Y1 = 190;
+            this.lineShape1.Y2 = 190;
+            // 
+            // shapeContainer1
+            // 
+            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer1.Name = "shapeContainer1";
+            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.lineShape1});
+            this.shapeContainer1.Size = new System.Drawing.Size(500, 473);
+            this.shapeContainer1.TabIndex = 9;
+            this.shapeContainer1.TabStop = false;
+            // 
+            // grpDodajPromijeni
+            // 
+            this.grpDodajPromijeni.Controls.Add(this.btnEvidentiraj);
+            this.grpDodajPromijeni.Controls.Add(this.label3);
+            this.grpDodajPromijeni.Controls.Add(this.label4);
+            this.grpDodajPromijeni.Controls.Add(this.label5);
+            this.grpDodajPromijeni.Controls.Add(this.txtTelefon);
+            this.grpDodajPromijeni.Controls.Add(this.txtIme);
+            this.grpDodajPromijeni.Controls.Add(this.txtPrezime);
+            this.grpDodajPromijeni.Location = new System.Drawing.Point(12, 11);
+            this.grpDodajPromijeni.Name = "grpDodajPromijeni";
+            this.grpDodajPromijeni.Size = new System.Drawing.Size(476, 167);
+            this.grpDodajPromijeni.TabIndex = 10;
+            this.grpDodajPromijeni.TabStop = false;
+            this.grpDodajPromijeni.Text = "groupBox1";
             // 
             // Evidencija_Klijenata
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 263);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(500, 473);
+            this.Controls.Add(this.grpDodajPromijeni);
+            this.Controls.Add(this.btnBrisi);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Evidencija_Klijenata";
+            this.ShowIcon = false;
             this.Text = "Evidencija Kupaca";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.grpDodajPromijeni.ResumeLayout(false);
+            this.grpDodajPromijeni.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,16 +192,17 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtIme;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtPrezime;
+        private System.Windows.Forms.TextBox txtTelefon;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnEvidentiraj;
+        private System.Windows.Forms.Button btnBrisi;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        private System.Windows.Forms.GroupBox grpDodajPromijeni;
     }
 }
