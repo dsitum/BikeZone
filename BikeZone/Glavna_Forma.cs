@@ -34,9 +34,15 @@ namespace BikeZone
 
         }
 
-        private void EvidencijaUsluga_Menu_Click(object sender, EventArgs e)
+        private void DodajUslugu_Menu_Click(object sender, EventArgs e)
         {
-            Evidencija_Usluga evidencijaUsluga = new Evidencija_Usluga();
+            Evidencija_Usluga evidencijaUsluga = new Evidencija_Usluga(true);
+            evidencijaUsluga.ShowDialog();
+        }
+
+        private void UrediUslugu_Menu_Click(object sender, EventArgs e)
+        {
+            Evidencija_Usluga evidencijaUsluga = new Evidencija_Usluga(false);
             evidencijaUsluga.ShowDialog();
         }
 
