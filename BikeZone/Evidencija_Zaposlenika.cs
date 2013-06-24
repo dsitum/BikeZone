@@ -24,9 +24,20 @@ namespace BikeZone
         /// 
         /// </summary>
         /// <param name="dodaj_promijeni">Ako je true onda se radi o dodavanju novog zaposlenika, ako je false onda mijenjamo postojeceg clana</param>
-        public Evidencija_Zaposlenika(bool dodaj_promijeni)
+        public Evidencija_Zaposlenika(bool dodaj_promijeni,int id_zaposlenika)
         {
             InitializeComponent();
+            string upit=string.Format("SELECT tip FROM \"Zaposlenici\" WHERE \"idZaposlenika\"='{0}';",id_zaposlenika.ToString());
+            using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
+            {
+                while (dr.Read())
+                {
+                    if (string.Compare(dr["tip"].ToString(), "K") == 0)
+                    {
+                        btnEvidentiraj.Enabled = false;
+                    }
+                }
+            }
             this.CenterToParent();
             Dodaj_Promijeni = dodaj_promijeni;
             selektirajZaposlenike();
@@ -162,7 +173,7 @@ namespace BikeZone
                 }
                 else{
                     upit = string.Format("INSERT INTO \"Zaposlenici\" VALUES(DEFAULT,'{0}','{1}','{2}', "
-                                        + "'{3}', '{4}', '{5}', '{6}'"
+                                        + "'{3}', '{4}', '{5}', '{6}','K'"
                                         + ");"
                                         , txtKorisnicko.Text, txtLozinka.Text, txtIme.Text, txtPrezime.Text, txtTelefon.Text, txtEmail.Text, txtPlaca.Text,id);
                 }
