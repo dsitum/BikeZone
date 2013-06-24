@@ -171,7 +171,13 @@ namespace BikeZone.Podobrasci
         {
             if (DodajNovuPrimku == true)
             {
-                //string upit = string.Format("INSERT INTO \"Primke\" (datum, placeno, dobavljac) VALUES ('{0}', {1}, {2})", DatumZaprimanja_datepicker.Text, Placeno_checkbox.Checked.ToString(), );
+                string upit = string.Format("INSERT INTO \"Primke\" (datum, placeno, dobavljac) VALUES ('{0}', {1}, {2})", DatumZaprimanja_datepicker.Text, Placeno_checkbox.Checked.ToString(), Dobavljaci_combobox.SelectedValue);
+                DB.Instance.izvrsi_upit(upit);
+
+                foreach (DataGridViewRow red in StavkePrimke_datagrid.Rows)
+                {
+                    
+                }
             }
             else
             {
