@@ -18,14 +18,21 @@ namespace BikeZone.Podobrasci
         public bool odustani = true;
         public int idProizvoda;
         public string nazivProizvoda;
+        public bool bicikl;
         public int kolicina;
         public float cijena;
 
-        public Evidencija_Stavke_Primke()
+        public Evidencija_Stavke_Primke(string idDijelaBicikla = null, string bicikl = null, string kolicina = null, string cijena = null)
         {
             InitializeComponent();
 
             UnesiStavkePrimkeUPadajuciIzbornik();
+
+            //ako se radi o uređivanju obrasca, tj. ako smo proslijedili parametre konstruktoru
+            if (idDijelaBicikla != null)
+            {
+                PopuniPoljaObrasca(idDijelaBicikla, bicikl, kolicina, cijena);
+            }
         }
 
         private void UnesiStavkePrimkeUPadajuciIzbornik()
@@ -55,6 +62,14 @@ namespace BikeZone.Podobrasci
                 Proizvodi_combobox.DisplayMember = "naziv";
                 Proizvodi_combobox.ValueMember = "idDijelaBicikla";
             }
+        }
+
+        private void PopuniPoljaObrasca(string idDijelaBicikla, string bicikl, string kolicina, string cijena)
+        {
+            Bicikl_checkbox.Checked = bicikl == "True" ? true : false;
+            Proizvodi_combobox.SelectedValue = idDijelaBicikla;
+            Cijena_textbox.Text = cijena;
+            Kolicina_textbox.Text = kolicina;
         }
 
 
@@ -89,6 +104,7 @@ namespace BikeZone.Podobrasci
                 this.odustani = false;
                 this.idProizvoda = int.Parse(Proizvodi_combobox.SelectedValue.ToString());
                 this.nazivProizvoda = Proizvodi_combobox.Text;
+                this.bicikl = Bicikl_checkbox.Checked;
                 this.kolicina = int.Parse(Kolicina_textbox.Text);
                 this.cijena = float.Parse(Cijena_textbox.Text);
 

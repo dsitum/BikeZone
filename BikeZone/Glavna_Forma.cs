@@ -14,9 +14,6 @@ namespace BikeZone
 {
     public partial class Glavna_Forma : Form
     {
-
-        private int id_zaposlenika;
-
         public int Id_zaposlenika { get; set; }
 
         public Glavna_Forma(int idZaposlenika)

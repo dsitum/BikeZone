@@ -60,7 +60,7 @@ namespace BikeZone
             {
                 //Popunjavamo datagrid sa stavkama primke
                 string idSelektiranePrimke = Primke_datagrid.CurrentRow.Cells[0].Value.ToString();
-                string upit = "SELECT \"StavkePrimke\".\"idDijelaBicikla\", \"DijeloviBicikli\".naziv AS \"Naziv robe\", \"StavkePrimke\".kolicina AS \"Količina\", \"StavkePrimke\".cijena AS \"Jedinična nabavna cijena\" FROM \"StavkePrimke\" JOIN \"DijeloviBicikli\" USING (\"idDijelaBicikla\") WHERE \"StavkePrimke\".primka = " + idSelektiranePrimke;
+                string upit = "SELECT \"StavkePrimke\".\"idDijelaBicikla\", \"DijeloviBicikli\".naziv AS \"Naziv robe\", \"TipDijelaBicikla\".bicikl AS \"Bicikl\", \"StavkePrimke\".kolicina AS \"Količina\", \"StavkePrimke\".cijena AS \"Jedinična nabavna cijena\" FROM \"StavkePrimke\" JOIN \"DijeloviBicikli\" USING (\"idDijelaBicikla\") JOIN \"TipDijelaBicikla\" USING (\"idTipa\") WHERE \"StavkePrimke\".primka = " + idSelektiranePrimke;
 
                 using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
                 {
@@ -90,6 +90,9 @@ namespace BikeZone
         {
             Evidencija_Primke evidencijaPrimke = new Evidencija_Primke(true);
             evidencijaPrimke.ShowDialog();
+
+            //Ažuriramo datagrid
+            UnesiPodatkeUDatagrid();
         }
 
         private void PromijeniPrimku_btn_Click(object sender, EventArgs e)
@@ -98,6 +101,9 @@ namespace BikeZone
             {
                 Evidencija_Primke evidencijaPrimke = new Evidencija_Primke(false, Primke_datagrid.CurrentRow);
                 evidencijaPrimke.ShowDialog();
+
+                //Ažuriramo datagrid
+                UnesiPodatkeUDatagrid();
             }
             else
             {

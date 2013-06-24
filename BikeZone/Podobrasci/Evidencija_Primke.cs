@@ -14,6 +14,7 @@ namespace BikeZone.Podobrasci
     public partial class Evidencija_Primke : Form
     {
         private bool DodajNovuPrimku;
+        private string idPrimke;
 
         public Evidencija_Primke(bool dodajNovuPrimku, DataGridViewRow primka = null)
         {
@@ -30,7 +31,7 @@ namespace BikeZone.Podobrasci
                 EvidencijaPrimke_btn.Text = "Dodaj";
 
                 //upisujemo zaglavlje u datagrid sa stavkama primke
-                string upit = "SELECT \"StavkePrimke\".\"idDijelaBicikla\", \"DijeloviBicikli\".naziv AS \"Naziv robe\", \"StavkePrimke\".kolicina AS \"Količina\", \"StavkePrimke\".cijena AS \"Jedinična nabavna cijena\" FROM \"StavkePrimke\" JOIN \"DijeloviBicikli\" USING (\"idDijelaBicikla\") WHERE false";
+                string upit = "SELECT \"StavkePrimke\".\"idDijelaBicikla\", \"DijeloviBicikli\".naziv AS \"Naziv robe\", \"TipDijelaBicikla\".bicikl, \"StavkePrimke\".kolicina AS \"Količina\", \"StavkePrimke\".cijena AS \"Jedinična nabavna cijena\" FROM \"StavkePrimke\" JOIN \"DijeloviBicikli\" USING (\"idDijelaBicikla\") JOIN \"TipDijelaBicikla\" USING (\"idTipa\") WHERE false";
                 using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
                 {
                     DataTable dt = new DataTable();
@@ -57,7 +58,7 @@ namespace BikeZone.Podobrasci
 
                 //popunjavamo datagrid sa stavkama primke
                 string idPrimke = primka.Cells["idPrimke"].Value.ToString();
-                string upit = "SELECT \"StavkePrimke\".\"idDijelaBicikla\", \"DijeloviBicikli\".naziv AS \"Naziv robe\", \"StavkePrimke\".kolicina AS \"Količina\", \"StavkePrimke\".cijena AS \"Jedinična nabavna cijena\" FROM \"StavkePrimke\" JOIN \"DijeloviBicikli\" USING (\"idDijelaBicikla\") WHERE primka = " + idPrimke;
+                string upit = "SELECT \"StavkePrimke\".\"idDijelaBicikla\", \"DijeloviBicikli\".naziv AS \"Naziv robe\", \"TipDijelaBicikla\".bicikl AS \"Bicikl\", \"StavkePrimke\".kolicina AS \"Količina\", \"StavkePrimke\".cijena AS \"Jedinična nabavna cijena\" FROM \"StavkePrimke\" JOIN \"DijeloviBicikli\" USING (\"idDijelaBicikla\") JOIN \"TipDijelaBicikla\" USING (\"idTipa\") WHERE primka = " + idPrimke;
                 using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
                 {
                     DataTable dt = new DataTable();
@@ -68,6 +69,9 @@ namespace BikeZone.Podobrasci
                     }
                     StavkePrimke_datagrid.DataSource = dt;
                 }
+
+                //popunjavamo klasnu varijablu idPrimke s ID kojeg smo dohvatili
+                this.idPrimke = idPrimke;
 
                 UrediPostavkeDatagrida();
             }
@@ -126,6 +130,7 @@ namespace BikeZone.Podobrasci
                 DataTable dt = StavkePrimke_datagrid.DataSource as DataTable;
                 DataRow stavka = dt.NewRow();
                 stavka["idDijelaBicikla"] = evidencijaStavkePrimke.idProizvoda;
+                stavka["Bicikl"] = evidencijaStavkePrimke.bicikl;
                 stavka["Naziv robe"] = evidencijaStavkePrimke.nazivProizvoda;
                 stavka["Količina"] = evidencijaStavkePrimke.kolicina;
                 stavka["Jedinična nabavna cijena"] = evidencijaStavkePrimke.cijena;
@@ -143,14 +148,23 @@ namespace BikeZone.Podobrasci
             }
             else
             {
-                Evidencija_Stavke_Primke evidencijaStavkePrimke = new Evidencija_Stavke_Primke();
+                //Obrascu ćemo poslati podatke za uređivanje kojima treba popuniti svoja polja
+                string idDijelaBicikla = StavkePrimke_datagrid.CurrentRow.Cells["idDijelaBicikla"].Value.ToString();
+                string bicikl = StavkePrimke_datagrid.CurrentRow.Cells["Bicikl"].Value.ToString();
+                string kolicina = StavkePrimke_datagrid.CurrentRow.Cells["Količina"].Value.ToString();
+                string cijena = StavkePrimke_datagrid.CurrentRow.Cells["Jedinična nabavna cijena"].Value.ToString();
+                Evidencija_Stavke_Primke evidencijaStavkePrimke = new Evidencija_Stavke_Primke(idDijelaBicikla, bicikl, kolicina, cijena);
                 evidencijaStavkePrimke.ShowDialog();
 
-                //podatke koje je prethodni obrazac zapisao u globalne varijable sada dohvaćamo i zapisujemo u DataGrid
-                StavkePrimke_datagrid.CurrentRow.Cells["idDijelaBicikla"].Value = evidencijaStavkePrimke.idProizvoda;
-                StavkePrimke_datagrid.CurrentRow.Cells["Naziv robe"].Value = evidencijaStavkePrimke.nazivProizvoda;
-                StavkePrimke_datagrid.CurrentRow.Cells["Količina"].Value = evidencijaStavkePrimke.kolicina;
-                StavkePrimke_datagrid.CurrentRow.Cells["Jedinična nabavna cijena"].Value = evidencijaStavkePrimke.cijena;
+                //podatke koje je prethodni obrazac (evidencijaStavkePrimke) zapisao u globalne varijable sada dohvaćamo i zapisujemo u DataGrid
+                if (evidencijaStavkePrimke.odustani == false)
+                {
+                    StavkePrimke_datagrid.CurrentRow.Cells["idDijelaBicikla"].Value = evidencijaStavkePrimke.idProizvoda;
+                    StavkePrimke_datagrid.CurrentRow.Cells["Naziv robe"].Value = evidencijaStavkePrimke.nazivProizvoda;
+                    StavkePrimke_datagrid.CurrentRow.Cells["Bicikl"].Value = evidencijaStavkePrimke.bicikl;
+                    StavkePrimke_datagrid.CurrentRow.Cells["Količina"].Value = evidencijaStavkePrimke.kolicina;
+                    StavkePrimke_datagrid.CurrentRow.Cells["Jedinična nabavna cijena"].Value = evidencijaStavkePrimke.cijena;
+                }
             }
         }
 
@@ -171,17 +185,46 @@ namespace BikeZone.Podobrasci
         {
             if (DodajNovuPrimku == true)
             {
-                string upit = string.Format("INSERT INTO \"Primke\" (datum, placeno, dobavljac) VALUES ('{0}', {1}, {2})", DatumZaprimanja_datepicker.Text, Placeno_checkbox.Checked.ToString(), Dobavljaci_combobox.SelectedValue);
-                DB.Instance.izvrsi_upit(upit);
-
-                foreach (DataGridViewRow red in StavkePrimke_datagrid.Rows)
-                {
-                    
-                }
+                DodajPrimkuUBazu();
             }
             else
             {
-                
+                //najprije brišemo postojeću primku iz baze podataka (kaskadno se brišu i stavke primke)
+                string upit = "DELETE FROM \"Primke\" WHERE \"idPrimke\" = " + idPrimke;
+                DB.Instance.izvrsi_upit(upit);
+
+                //potom umećemo novu primku zadanu obrascem
+                DodajPrimkuUBazu();
+            }
+
+            this.Close();
+        }
+
+        private void DodajPrimkuUBazu()
+        {
+            //dodavamo novu primku u bazu podataka
+            string datum = DatumZaprimanja_datepicker.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            string upit = string.Format("INSERT INTO \"Primke\" (datum, placeno, dobavljac) VALUES ('{0}', {1}, {2})", datum, Placeno_checkbox.Checked.ToString(), Dobavljaci_combobox.SelectedValue);
+            DB.Instance.izvrsi_upit(upit);
+
+            //dohvaćamo ID primke koja je upravo dodana u bazu
+            upit = "SELECT MAX(\"idPrimke\") FROM \"Primke\"";
+            string idPrimke;
+            using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
+            {
+                dr.Read();
+                idPrimke = dr[0].ToString();
+            }
+
+            //dodavamo sve stavke primke u bazu
+            foreach (DataGridViewRow red in StavkePrimke_datagrid.Rows)
+            {
+                string idDijelaBicikla = red.Cells["idDijelaBicikla"].Value.ToString();
+                string kolicina = red.Cells["Količina"].Value.ToString();
+                string cijena = red.Cells["Jedinična nabavna cijena"].Value.ToString();
+
+                upit = string.Format("INSERT INTO \"StavkePrimke\" (primka, \"idDijelaBicikla\", kolicina, cijena) VALUES ({0}, {1}, {2}, {3})", idPrimke, idDijelaBicikla, kolicina, cijena);
+                DB.Instance.izvrsi_upit(upit);
             }
         }
         

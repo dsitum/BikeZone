@@ -184,7 +184,7 @@
             this.Controls.Add(this.PodaciOPrimci);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Evidencija_Primke";
-            this.Text = "Evidencija_Primke";
+            this.Text = "Evidencija primke";
             ((System.ComponentModel.ISupportInitialize)(this.StavkePrimke_datagrid)).EndInit();
             this.PodaciOPrimci.ResumeLayout(false);
             this.PodaciOPrimci.PerformLayout();
