@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtSifra = new System.Windows.Forms.TextBox();
+            this.txtNaziv = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnEvidentiraj = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtAdresa = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtTelefon = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
@@ -52,19 +52,19 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Šifra:";
             // 
-            // textBox1
+            // txtSifra
             // 
-            this.textBox1.Location = new System.Drawing.Point(489, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtSifra.Location = new System.Drawing.Point(489, 45);
+            this.txtSifra.Name = "txtSifra";
+            this.txtSifra.Size = new System.Drawing.Size(100, 20);
+            this.txtSifra.TabIndex = 1;
             // 
-            // textBox2
+            // txtNaziv
             // 
-            this.textBox2.Location = new System.Drawing.Point(489, 71);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(193, 20);
-            this.textBox2.TabIndex = 1;
+            this.txtNaziv.Location = new System.Drawing.Point(489, 71);
+            this.txtNaziv.Name = "txtNaziv";
+            this.txtNaziv.Size = new System.Drawing.Size(193, 20);
+            this.txtNaziv.TabIndex = 1;
             // 
             // label2
             // 
@@ -75,14 +75,15 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Naziv:";
             // 
-            // button1
+            // btnEvidentiraj
             // 
-            this.button1.Location = new System.Drawing.Point(489, 180);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Evidentiraj";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnEvidentiraj.Location = new System.Drawing.Point(489, 180);
+            this.btnEvidentiraj.Name = "btnEvidentiraj";
+            this.btnEvidentiraj.Size = new System.Drawing.Size(75, 23);
+            this.btnEvidentiraj.TabIndex = 2;
+            this.btnEvidentiraj.Text = "Evidentiraj";
+            this.btnEvidentiraj.UseVisualStyleBackColor = true;
+            this.btnEvidentiraj.Click += new System.EventHandler(this.btnEvidentiraj_Click);
             // 
             // button2
             // 
@@ -92,13 +93,14 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Obriši";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // textBox3
+            // txtAdresa
             // 
-            this.textBox3.Location = new System.Drawing.Point(489, 97);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(193, 20);
-            this.textBox3.TabIndex = 1;
+            this.txtAdresa.Location = new System.Drawing.Point(489, 97);
+            this.txtAdresa.Name = "txtAdresa";
+            this.txtAdresa.Size = new System.Drawing.Size(193, 20);
+            this.txtAdresa.TabIndex = 1;
             // 
             // label3
             // 
@@ -109,12 +111,12 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Adresa:";
             // 
-            // textBox4
+            // txtTelefon
             // 
-            this.textBox4.Location = new System.Drawing.Point(489, 123);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 1;
+            this.txtTelefon.Location = new System.Drawing.Point(489, 123);
+            this.txtTelefon.Name = "txtTelefon";
+            this.txtTelefon.Size = new System.Drawing.Size(100, 20);
+            this.txtTelefon.TabIndex = 1;
             // 
             // label4
             // 
@@ -149,11 +151,11 @@
             this.ClientSize = new System.Drawing.Size(715, 425);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnEvidentiraj);
+            this.Controls.Add(this.txtTelefon);
+            this.Controls.Add(this.txtAdresa);
+            this.Controls.Add(this.txtNaziv);
+            this.Controls.Add(this.txtSifra);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -171,14 +173,14 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtSifra;
+        private System.Windows.Forms.TextBox txtNaziv;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnEvidentiraj;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtAdresa;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtTelefon;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label5;
