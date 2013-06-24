@@ -16,7 +16,8 @@ namespace BikeZone
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLogin());
+            //Application.Run(new frmLogin());
+            Application.Run(new Glavna_Forma(7));
         }
     }
 }

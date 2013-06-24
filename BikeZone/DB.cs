@@ -64,7 +64,7 @@ namespace BikeZone
             }
 
             /// <summary>
-            /// izvrši drugi upit po želji  ( delete update, insert )
+            /// izvrši drugi upit po želji  ( delete, update, insert )
             /// </summary>
             /// <param name="sql">Upit kojeg je zadala druga forma</param>
             /// <returns></returns>
