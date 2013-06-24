@@ -38,9 +38,11 @@
             this.unosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dijelovaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.proizvodaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.urediToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dodajToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.urediToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.uslugaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dodajToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.urediToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.dobavljačaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dobavljačaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.kupacaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,13 +51,11 @@
             this.zaposlenikaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dodajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.urediToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.izvještajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.računToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.primkaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomoćToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oTvrtki_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dodajToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.urediToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.poslovanjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.računiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.primkeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +64,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aplikacijaToolStripMenuItem,
             this.unosToolStripMenuItem,
-            this.izvještajToolStripMenuItem,
+            this.poslovanjeToolStripMenuItem,
             this.pomoćToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -140,19 +140,19 @@
             this.proizvodaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.proizvodaToolStripMenuItem.Text = "Proizvoda";
             // 
-            // urediToolStripMenuItem1
-            // 
-            this.urediToolStripMenuItem1.Name = "urediToolStripMenuItem1";
-            this.urediToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.urediToolStripMenuItem1.Text = "Uredi";
-            this.urediToolStripMenuItem1.Click += new System.EventHandler(this.urediToolStripMenuItem1_Click);
-            // 
             // dodajToolStripMenuItem1
             // 
             this.dodajToolStripMenuItem1.Name = "dodajToolStripMenuItem1";
             this.dodajToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.dodajToolStripMenuItem1.Text = "Dodaj";
             this.dodajToolStripMenuItem1.Click += new System.EventHandler(this.dodajToolStripMenuItem1_Click);
+            // 
+            // urediToolStripMenuItem1
+            // 
+            this.urediToolStripMenuItem1.Name = "urediToolStripMenuItem1";
+            this.urediToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.urediToolStripMenuItem1.Text = "Uredi";
+            this.urediToolStripMenuItem1.Click += new System.EventHandler(this.urediToolStripMenuItem1_Click);
             // 
             // uslugaToolStripMenuItem1
             // 
@@ -162,6 +162,20 @@
             this.uslugaToolStripMenuItem1.Name = "uslugaToolStripMenuItem1";
             this.uslugaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.uslugaToolStripMenuItem1.Text = "Usluga";
+            // 
+            // dodajToolStripMenuItem3
+            // 
+            this.dodajToolStripMenuItem3.Name = "dodajToolStripMenuItem3";
+            this.dodajToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.dodajToolStripMenuItem3.Text = "Dodaj";
+            this.dodajToolStripMenuItem3.Click += new System.EventHandler(this.DodajUslugu_Menu_Click);
+            // 
+            // urediToolStripMenuItem3
+            // 
+            this.urediToolStripMenuItem3.Name = "urediToolStripMenuItem3";
+            this.urediToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.urediToolStripMenuItem3.Text = "Uredi";
+            this.urediToolStripMenuItem3.Click += new System.EventHandler(this.UrediUslugu_Menu_Click);
             // 
             // dobavljačaToolStripMenuItem
             // 
@@ -215,37 +229,16 @@
             // dodajToolStripMenuItem
             // 
             this.dodajToolStripMenuItem.Name = "dodajToolStripMenuItem";
-            this.dodajToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.dodajToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dodajToolStripMenuItem.Text = "Dodaj";
             this.dodajToolStripMenuItem.Click += new System.EventHandler(this.dodajToolStripMenuItem_Click);
             // 
             // urediToolStripMenuItem
             // 
             this.urediToolStripMenuItem.Name = "urediToolStripMenuItem";
-            this.urediToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.urediToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.urediToolStripMenuItem.Text = "Uredi";
             this.urediToolStripMenuItem.Click += new System.EventHandler(this.urediToolStripMenuItem_Click);
-            // 
-            // izvještajToolStripMenuItem
-            // 
-            this.izvještajToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.računToolStripMenuItem,
-            this.primkaToolStripMenuItem});
-            this.izvještajToolStripMenuItem.Name = "izvještajToolStripMenuItem";
-            this.izvještajToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.izvještajToolStripMenuItem.Text = "&Izvještaj";
-            // 
-            // računToolStripMenuItem
-            // 
-            this.računToolStripMenuItem.Name = "računToolStripMenuItem";
-            this.računToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.računToolStripMenuItem.Text = "&Račun";
-            // 
-            // primkaToolStripMenuItem
-            // 
-            this.primkaToolStripMenuItem.Name = "primkaToolStripMenuItem";
-            this.primkaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.primkaToolStripMenuItem.Text = "Pri&mka";
             // 
             // pomoćToolStripMenuItem
             // 
@@ -258,23 +251,32 @@
             // oTvrtki_MenuItem
             // 
             this.oTvrtki_MenuItem.Name = "oTvrtki_MenuItem";
-            this.oTvrtki_MenuItem.Size = new System.Drawing.Size(113, 22);
+            this.oTvrtki_MenuItem.Size = new System.Drawing.Size(152, 22);
             this.oTvrtki_MenuItem.Text = "&O tvrtki";
             this.oTvrtki_MenuItem.Click += new System.EventHandler(this.OTvrtki_Menu_Click);
             // 
-            // dodajToolStripMenuItem3
+            // poslovanjeToolStripMenuItem
             // 
-            this.dodajToolStripMenuItem3.Name = "dodajToolStripMenuItem3";
-            this.dodajToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
-            this.dodajToolStripMenuItem3.Text = "Dodaj";
-            this.dodajToolStripMenuItem3.Click += new System.EventHandler(this.DodajUslugu_Menu_Click);
+            this.poslovanjeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.računiToolStripMenuItem,
+            this.primkeToolStripMenuItem});
+            this.poslovanjeToolStripMenuItem.Name = "poslovanjeToolStripMenuItem";
+            this.poslovanjeToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.poslovanjeToolStripMenuItem.Text = "Po&slovanje";
             // 
-            // urediToolStripMenuItem3
+            // računiToolStripMenuItem
             // 
-            this.urediToolStripMenuItem3.Name = "urediToolStripMenuItem3";
-            this.urediToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
-            this.urediToolStripMenuItem3.Text = "Uredi";
-            this.urediToolStripMenuItem3.Click += new System.EventHandler(this.UrediUslugu_Menu_Click);
+            this.računiToolStripMenuItem.Name = "računiToolStripMenuItem";
+            this.računiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.računiToolStripMenuItem.Text = "&Računi";
+            this.računiToolStripMenuItem.Click += new System.EventHandler(this.računiToolStripMenuItem_Click);
+            // 
+            // primkeToolStripMenuItem
+            // 
+            this.primkeToolStripMenuItem.Name = "primkeToolStripMenuItem";
+            this.primkeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.primkeToolStripMenuItem.Text = "Pri&mke";
+            this.primkeToolStripMenuItem.Click += new System.EventHandler(this.primkeToolStripMenuItem_Click);
             // 
             // Glavna_Forma
             // 
@@ -302,9 +304,6 @@
         private System.Windows.Forms.ToolStripMenuItem izlazToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dijelovaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem izvještajToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem računToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem primkaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pomoćToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem oTvrtki_MenuItem;
         private System.Windows.Forms.ToolStripMenuItem dobavljačaToolStripMenuItem;
@@ -324,6 +323,9 @@
         private System.Windows.Forms.ToolStripMenuItem urediToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem dodajToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem urediToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem poslovanjeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem računiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem primkeToolStripMenuItem;
     }
 }
 

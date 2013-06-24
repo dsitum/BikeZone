@@ -170,5 +170,17 @@ namespace BikeZone
             Evidencija_Klijenata evidencijaKlijenata = new Evidencija_Klijenata(true);
             evidencijaKlijenata.ShowDialog();
         }
+
+        private void računiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Racuni racuni = new Racuni();
+            racuni.ShowDialog();
+        }
+
+        private void primkeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Primke primka = new Primke();
+            primka.ShowDialog();
+        }
     }
 }
