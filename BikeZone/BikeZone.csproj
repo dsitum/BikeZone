@@ -75,6 +75,30 @@
     <Compile Include="Evidencija_Zaposlenika.Designer.cs">
       <DependentUpon>Evidencija_Zaposlenika.cs</DependentUpon>
     </Compile>
+    <Compile Include="Podobrasci\Evidencija_Primke.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Podobrasci\Evidencija_Primke.Designer.cs">
+      <DependentUpon>Evidencija_Primke.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Podobrasci\Evidencija_Stavke_Primke.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Podobrasci\Evidencija_Stavke_Primke.Designer.cs">
+      <DependentUpon>Evidencija_Stavke_Primke.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Primke.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Primke.Designer.cs">
+      <DependentUpon>Primke.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Racuni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Racuni.Designer.cs">
+      <DependentUpon>Racuni.cs</DependentUpon>
+    </Compile>
     <Compile Include="Glavna_Forma.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +137,15 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Podobrasci\Evidencija_Primke.resx">
+      <DependentUpon>Evidencija_Primke.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Podobrasci\Evidencija_Stavke_Primke.resx">
+      <DependentUpon>Evidencija_Stavke_Primke.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Primke.resx">
+      <DependentUpon>Primke.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -142,6 +175,7 @@
   <ItemGroup>
     <None Include="Resources\Freeride_02_by_adnata.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

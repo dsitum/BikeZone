@@ -197,7 +197,7 @@ namespace BikeZone
             }
             else
             {
-                DialogResult odgovor = MessageBox.Show("Jeste li sigurni da želite obrisati odabrani redak", "Potvrda Brisanja", MessageBoxButtons.YesNo);
+                DialogResult odgovor = MessageBox.Show("Jeste li sigurni da želite obrisati odabranu uslugu?", "Potvrda Brisanja", MessageBoxButtons.YesNo);
                 if (odgovor == DialogResult.Yes)
                 {
                     string idSelektiranogReda = dataGridView1.CurrentRow.Cells[0].Value.ToString();
