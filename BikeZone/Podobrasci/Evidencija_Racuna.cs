@@ -237,32 +237,107 @@ namespace BikeZone.Podobrasci
             duplikati.Clear();
 
 
-            if (imaDuplikata == true)
+            //potom provjerimo imamo li dovoljno stavki na skladištu za isporučiti
+            List<string> prekoraceni = new List<string>();
+            foreach (DataGridViewRow redak in StavkeRacuna_datagrid.Rows)
             {
-                MessageBox.Show("Među stavkama računa postoje duplikati! Potrebno ih je ukloniti.");
+                string idStavke = redak.Cells["id"].Value.ToString();
+                string naziv = redak.Cells["Naziv"].Value.ToString();
+                string kolicinaZaProdaju = redak.Cells["Količina"].Value.ToString();
+                string popravakIliDio = redak.Cells["popravci_ili_dijelovibicikli"].Value.ToString();
+
+                if (popravakIliDio == "D")
+                {
+                    string upit = "SELECT kolicina, \"minimalnaKolicina\" FROM \"DijeloviBicikli\" WHERE \"idDijelaBicikla\" = " + idStavke;
+                    string trenutnaPravaKolicina;
+                    using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
+                    {
+                        dr.Read();
+                        trenutnaPravaKolicina = dr["kolicina"].ToString();
+                    }
+
+                    if (DodajNoviRacun == true)
+                    {
+                        if (int.Parse(trenutnaPravaKolicina) - int.Parse(kolicinaZaProdaju) < 0)
+                        {
+                            prekoraceni.Add(naziv);
+                        }
+                    }
+                    else
+                    {
+                        string staraKolicinaStavke;
+                        upit = string.Format("SELECT kolicina FROM \"StavkeRacuna\" WHERE \"idRacuna\" = {0} AND \"idPopravciDijeloviBicikli\" = {1}", idRacuna, idStavke);
+                        using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
+                        {
+                            dr.Read();
+                            staraKolicinaStavke = dr[0].ToString();
+                        }
+
+                        if (int.Parse(trenutnaPravaKolicina) - int.Parse(kolicinaZaProdaju) + int.Parse(staraKolicinaStavke) < 0)
+                        {
+                            prekoraceni.Add(naziv);
+                        }
+                    }
+                }
+            }
+
+            if (prekoraceni.Count > 0)
+            {
+                string poruka = "Navedene stavke je nemoguće prodati zbog manjka na skladištu:\n\n";
+                foreach (string proizvod in prekoraceni)
+                {
+                    poruka += proizvod + ", ";
+                }
+                MessageBox.Show(poruka);
             }
             else
             {
-                if (DodajNoviRacun == true)
+                if (imaDuplikata == true)
                 {
-                    DodajRacunUBazu();
+                    MessageBox.Show("Među stavkama računa postoje duplikati! Potrebno ih je ukloniti.");
                 }
                 else
                 {
-                    //najprije smanjujemo količine na skladištu za sve stavke računa koje će se obrisati
-                    Racuni.PovecajKolicinuNaSkladistu(idRacuna);
-                    //potom brišemo postojeći račun iz baze podataka (kaskadno se brišu i stavke računa)
-                    string upit = "DELETE FROM \"Racuni\" WHERE \"idRacuna\" = " + idRacuna;
-                    DB.Instance.izvrsi_upit(upit);
+                    if (DodajNoviRacun == true)
+                    {
+                        DodajRacunUBazu();
+                    }
+                    else
+                    {
+                        //najprije smanjujemo količine na skladištu za sve stavke računa koje će se obrisati
+                        Racuni.PovecajKolicinuNaSkladistu(idRacuna);
+                        //potom brišemo postojeći račun iz baze podataka (kaskadno se brišu i stavke računa)
+                        string upit = "DELETE FROM \"Racuni\" WHERE \"idRacuna\" = " + idRacuna;
+                        DB.Instance.izvrsi_upit(upit);
 
-                    //na kraju umećemo novu primku zadanu obrascem
-                    DodajRacunUBazu();
+                        //na kraju umećemo novu primku zadanu obrascem
+                        DodajRacunUBazu();
+                    }
+
+                    //javljamo informaciju o tome kojih proizvoda je na skladištu ostalo malo
+                    string upitZaProizvode = "SELECT naziv, kolicina, \"minimalnaKolicina\" FROM \"DijeloviBicikli\"";
+                    using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upitZaProizvode))
+                    {
+                        string poruka = "";
+                        while (dr.Read())
+	                    {
+                            if (int.Parse(dr[1].ToString()) - int.Parse(dr[2].ToString()) <= 0)
+                            {
+                                poruka += dr[0].ToString() + " (minimalna količina: " + int.Parse(dr[2].ToString()) + ", stvarna količina: " + int.Parse(dr[1].ToString()) + ")\n";
+                            }
+	                    }
+
+                        //ako postoje takvi proizvodi, tj ako string poruke nije ostao prazan
+                        if (poruka != "")
+                        {
+                            poruka = "Sljedeće stavke je potrebno naručiti:\n" + poruka;
+                            MessageBox.Show(poruka);
+                        }
+                    }
+
+                    this.Close();
                 }
-
-                this.Close();
             }
-
-            
         }
 
         private void DodajRacunUBazu()
