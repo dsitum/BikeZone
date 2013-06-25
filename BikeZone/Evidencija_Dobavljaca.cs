@@ -85,15 +85,8 @@ namespace BikeZone
             {
                 try
                 {
-                    if (Dodaj_Promijeni == true)
-                    {  
-                        int indeks = dataGridView1.CurrentCell.RowIndex;
-                        upit = string.Format("UPDATE \"Dobavljaci\" SET idDobavljaca='{0}',nazivDobavljaca='{1}', adresa='{2}',telefon='{3}' WHERE \"idDobavljaca\"='{0}';",
-                                               txtSifra.Text, txtNaziv.Text, txtAdresa.Text, txtTelefon.Text, dataGridView1.Rows[indeks].Cells[0].Value.ToString());
-                        MessageBox.Show("Uspješno ažuriran klijent");
-
-                   }
-                    else
+                    if (Dodaj_Promijeni == false)
+                    
                     {
 
                         upit = string.Format("INSERT INTO \"Dobavljaci\" VALUES ('{0}','{1}','{2}','{3}');", txtSifra.Text, txtNaziv.Text,txtAdresa.Text, txtTelefon.Text);
@@ -147,6 +140,26 @@ namespace BikeZone
             }
                             
                                   
+        }
+
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            /*    if (Dodaj_Promijeni == true)
+                {
+
+                    string upit = "";
+                    int indeks = dataGridView1.CurrentCell.RowIndex;
+                    upit = string.Format("UPDATE \"Dobavljaci\" SET idDobavljaca='{0}',nazivDobavljaca='{1}', adresa='{2}',telefon='{3}' WHERE \"idDobavljaca\"='{0}';",
+                                           txtSifra.Text, txtNaziv.Text, txtAdresa.Text, txtTelefon.Text, dataGridView1.Rows[indeks].Cells[0].Value.ToString());
+
+
+                    DB.Instance.izvrsi_upit(upit);
+                                
+                    selektiraj_dobavljaca();
+                }
+            } */
+
         }
             
       }
