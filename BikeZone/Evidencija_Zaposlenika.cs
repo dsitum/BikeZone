@@ -83,12 +83,13 @@ namespace BikeZone
         /// </summary>
         private void selektirajZaposlenike()
         {
-            string upit = string.Format("SELECT*FROM \"Zaposlenici\";");
+            string upit = string.Format("SELECT \"idZaposlenika\", \"korisnickoIme\" AS \"Korisničko ime\", lozinka AS \"Lozinka\", ime AS \"Ime\", prezime AS \"Prezime\", telefon AS \"Telefon\", email AS \"E-mail\", placa AS \"Plaća\" FROM \"Zaposlenici\";");
             using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
             {
                 DataTable dt = new DataTable();
                 dt.Load(dr);
                 dataGridView1.DataSource = dt;
+                dataGridView1.Columns[0].Visible = false;
             }
         }
 

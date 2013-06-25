@@ -73,7 +73,7 @@
             this.Racuni_datagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Racuni_datagrid.Location = new System.Drawing.Point(12, 33);
             this.Racuni_datagrid.Name = "Racuni_datagrid";
-            this.Racuni_datagrid.Size = new System.Drawing.Size(480, 150);
+            this.Racuni_datagrid.Size = new System.Drawing.Size(387, 150);
             this.Racuni_datagrid.TabIndex = 6;
             this.Racuni_datagrid.SelectionChanged += new System.EventHandler(this.Racuni_datagrid_SelectionChanged);
             // 
@@ -83,7 +83,7 @@
             this.groupBox1.Controls.Add(this.PromijeniRacun_btn);
             this.groupBox1.Controls.Add(this.IspisRacuna_btn);
             this.groupBox1.Controls.Add(this.ObrisiRacun_btn);
-            this.groupBox1.Location = new System.Drawing.Point(503, 49);
+            this.groupBox1.Location = new System.Drawing.Point(417, 49);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(89, 134);
             this.groupBox1.TabIndex = 10;

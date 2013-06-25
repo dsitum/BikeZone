@@ -13,32 +13,36 @@ namespace BikeZone
 {
     public partial class Evidencija_Dobavljaca : Form
     {
+        private bool DodajNovogDobavljaca { get; set; }
 
-        private bool Dodaj_Promijeni { get; set; }
-
-        public Evidencija_Dobavljaca()
+        public Evidencija_Dobavljaca(bool dodajNovogDobavljaca)
         {
             InitializeComponent();
             this.CenterToParent();
+            this.DodajNovogDobavljaca = dodajNovogDobavljaca;
                         
-            selektiraj_dobavljaca();
-            
+            selektiraj_dobavljace();
         }
 
-        private void selektiraj_dobavljaca()
+        private void selektiraj_dobavljace()
         {
-            string upit = string.Format("SELECT*FROM \"Dobavljaci\";");
+            string upit = string.Format("SELECT \"idDobavljaca\", \"nazivDobavljaca\" AS \"Naziv Dobavljača\", adresa AS \"Adresa\", telefon AS \"Telefon\" FROM \"Dobavljaci\"");
             using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
             {
                 DataTable dt = new DataTable();
                 dt.Load(dr);
+                while (dr.Read())
+                {
+                    dt.Load(dr);
+                }
                 dataGridView1.DataSource = dt;
             }
+            dataGridView1.Columns[0].Visible = false;
         }
 
         private void upisi_dobavljaca_u_kontrole()
         {
-            if (dataGridView1.Rows.Count == 1)
+            if (dataGridView1.Rows.Count == 0)
             {
                 MessageBox.Show("Nema niti jednog dobavljaca!");
             }
@@ -46,15 +50,11 @@ namespace BikeZone
             {
                 #region upisi podatke u kontrole
 
-                int indeks = dataGridView1.CurrentCell.RowIndex;
-                txtSifra.Text = dataGridView1.Rows[indeks].Cells[1].Value.ToString();
-                txtNaziv.Text = dataGridView1.Rows[indeks].Cells[2].Value.ToString();
-                txtAdresa.Text = dataGridView1.Rows[indeks].Cells[3].Value.ToString();
-                txtTelefon.Text = dataGridView1.Rows[indeks].Cells[4].Value.ToString();
+                txtNaziv.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                txtAdresa.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                txtTelefon.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
 
                 #endregion
-
-                upisi_dobavljaca_u_kontrole();
             }
         }
 
@@ -62,11 +62,7 @@ namespace BikeZone
         {
             string upit = "";
 
-            if (txtSifra.Text == "")
-            {
-                MessageBox.Show("Niste unijeli šifru");
-            }
-            else if (txtNaziv.Text == "")
+            if (txtNaziv.Text == "")
             {
                 MessageBox.Show("Niste unijeli naziv");
             }
@@ -83,83 +79,63 @@ namespace BikeZone
 
             else
             {
-                try
-                {
-                    if (Dodaj_Promijeni == false)
-                    
+                    if (DodajNovogDobavljaca == true)
                     {
-
-                        upit = string.Format("INSERT INTO \"Dobavljaci\" VALUES ('{0}','{1}','{2}','{3}');", txtSifra.Text, txtNaziv.Text,txtAdresa.Text, txtTelefon.Text);
-                        MessageBox.Show("Uspješno upisan klijent");
+                        upit = string.Format("INSERT INTO \"Dobavljaci\" (\"idDobavljaca\", \"nazivDobavljaca\", adresa, telefon) VALUES (DEFAULT,'{0}','{1}','{2}')", txtNaziv.Text, txtAdresa.Text, txtTelefon.Text);
+                        MessageBox.Show("Dobavljač unesen u bazu");
+                        DB.Instance.izvrsi_upit(upit);
                     }
-                    DB.Instance.izvrsi_upit(upit);
+                    else
+                    {
+                        string idDobavljaca = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                        upit = string.Format("UPDATE \"Dobavljaci\" SET \"nazivDobavljaca\" = '{0}', adresa = '{1}', telefon = '{2}' WHERE \"idDobavljaca\" = {3}", txtNaziv.Text, txtAdresa.Text, txtTelefon.Text, idDobavljaca);
+                        DB.Instance.izvrsi_upit(upit);
+                    }
 
-                    txtSifra.Text = "";
                     txtAdresa.Text = "";
                     txtNaziv.Text = "";
                     txtTelefon.Text = "";
 
-                    selektiraj_dobavljaca();
-                }
-                catch
-                {
-                    MessageBox.Show("Nije uspješno upisano!");
-                }
-
+                    selektiraj_dobavljace();
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Obrisi_btn_Click(object sender, EventArgs e)
         {
-
-            if (dataGridView1.Rows.Count == 1)
+            if (dataGridView1.Rows.Count == 0)
             {
-                MessageBox.Show("Ne mogu obaviti brisanje dobavljača!");
+                MessageBox.Show("Na popisu ne postoji niti jedan dobavljač!");
             }
-
-            
-            if (MessageBox.Show("Da li želite zaista obrisati dobavljača?", "BikeZone ", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            else
             {
-                try
+                if (MessageBox.Show("Jeste li sigurni da želite obrisati dobavljača?", "Brisanje dobavljača", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    string upit = string.Format("DELETE FROM" +
-                         "\"Dobavljaci\" WHERE \"idDobavljaca\"='{0}';"
-                         , dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString());
-                    DB.Instance.izvrsi_upit(upit);
-                    MessageBox.Show("Uspješno obrisan Dobavljača!");
-                    selektiraj_dobavljaca();
-                    if (Dodaj_Promijeni == true)
+                    try
                     {
-                        upisi_dobavljaca_u_kontrole();
+                        string upit = "DELETE FROM \"Dobavljaci\" WHERE \"idDobavljaca\" = " + dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                        DB.Instance.izvrsi_upit(upit);
+                        selektiraj_dobavljace();
+
+                        if (DodajNovogDobavljaca == false)
+                        {
+                            upisi_dobavljaca_u_kontrole();
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Nemoguće obrisati dobavljača! Obrišite najprije njegove primke");
                     }
                 }
-            catch
-                {
-                    MessageBox.Show("Pogrešno ste odabrali!\nNe mogu obaviti brisanje dobavljača!");
-                }
             }
-                            
-                                  
         }
 
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            /*    if (Dodaj_Promijeni == true)
-                {
-
-                    string upit = "";
-                    int indeks = dataGridView1.CurrentCell.RowIndex;
-                    upit = string.Format("UPDATE \"Dobavljaci\" SET idDobavljaca='{0}',nazivDobavljaca='{1}', adresa='{2}',telefon='{3}' WHERE \"idDobavljaca\"='{0}';",
-                                           txtSifra.Text, txtNaziv.Text, txtAdresa.Text, txtTelefon.Text, dataGridView1.Rows[indeks].Cells[0].Value.ToString());
-
-
-                    DB.Instance.izvrsi_upit(upit);
-                                
-                    selektiraj_dobavljaca();
-                }
-            } */
-
+            if (DodajNovogDobavljaca == false)
+            {
+                upisi_dobavljaca_u_kontrole();
+            }
         }
             
       }

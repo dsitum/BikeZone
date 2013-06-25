@@ -50,9 +50,9 @@ namespace BikeZone
         /// </summary>
         private void selektiraj_proizvode()
         {
-            string upit = string.Format("SELECT \"DijeloviBicikli\".\"idDijelaBicikla\", \"DijeloviBicikli\".naziv, "
-                                        +"\"TipDijelaBicikla\".naziv AS \"Tip dijela\",\"TipDijelaBicikla\".bicikl, \"godinaProizvodnje\","
-                                        +" kolicina, \"minimalnaKolicina\", cijena FROM \"DijeloviBicikli\" JOIN \"TipDijelaBicikla\" "
+            string upit = string.Format("SELECT \"DijeloviBicikli\".\"idDijelaBicikla\", \"DijeloviBicikli\".naziv AS \"Naziv\", "
+                                        +"\"TipDijelaBicikla\".naziv AS \"Tip dijela\", \"TipDijelaBicikla\".bicikl AS \"Bicikl\", \"godinaProizvodnje\" AS \"Godina Proizvodnje\","
+                                        +" kolicina AS \"Količina na skladištu\", \"minimalnaKolicina\" AS \"Minimalna količina\", cijena AS \"Cijena\" FROM \"DijeloviBicikli\" JOIN \"TipDijelaBicikla\" "
                                         +"ON \"DijeloviBicikli\".\"idTipa\"=\"TipDijelaBicikla\".\"idTipa\" JOIN \"PopravciDijeloviBicikli\" ON "
                                         +"\"PopravciDijeloviBicikli\".\"id\"=\"DijeloviBicikli\".\"idDijelaBicikla\" AND popravci_ili_dijelovibicikli='D';");
             using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
@@ -60,7 +60,10 @@ namespace BikeZone
                 DataTable dt = new DataTable();
                 dt.Load(dr);
                 dataGridView1.DataSource = dt;
+                dataGridView1.Columns[0].Visible = false;
             }
+
+
             if (chkBicikl.Checked)
             {
                 upit = "SELECT \"idTipa\",naziv FROM \"TipDijelaBicikla\" WHERE bicikl=true;";

@@ -33,12 +33,13 @@ namespace BikeZone
 
         private void selektiraj_klijente()
         {
-            string upit = string.Format("SELECT*FROM \"Klijenti\";");
+            string upit = string.Format("SELECT \"idKlijenta\", ime AS \"Ime\", prezime AS \"Prezime\", telefon AS \"Telefon\" FROM \"Klijenti\"");
             using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
             {
                 DataTable dt = new DataTable();
                 dt.Load(dr);
                 dataGridView1.DataSource = dt;
+                dataGridView1.Columns[0].Visible = false;
             }
         }
 

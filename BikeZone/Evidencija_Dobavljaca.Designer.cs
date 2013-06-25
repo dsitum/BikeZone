@@ -29,12 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtSifra = new System.Windows.Forms.TextBox();
             this.txtNaziv = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnEvidentiraj = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.Evidentiraj_btn = new System.Windows.Forms.Button();
+            this.Obrisi_btn = new System.Windows.Forms.Button();
             this.txtAdresa = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTelefon = new System.Windows.Forms.TextBox();
@@ -46,25 +44,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.evidencijaDobavljacaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(452, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Šifra:";
-            // 
-            // txtSifra
-            // 
-            this.txtSifra.Location = new System.Drawing.Point(489, 45);
-            this.txtSifra.Name = "txtSifra";
-            this.txtSifra.Size = new System.Drawing.Size(100, 20);
-            this.txtSifra.TabIndex = 1;
-            // 
             // txtNaziv
             // 
-            this.txtNaziv.Location = new System.Drawing.Point(489, 71);
+            this.txtNaziv.Location = new System.Drawing.Point(493, 48);
             this.txtNaziv.Name = "txtNaziv";
             this.txtNaziv.Size = new System.Drawing.Size(193, 20);
             this.txtNaziv.TabIndex = 1;
@@ -72,35 +54,35 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(446, 74);
+            this.label2.Location = new System.Drawing.Point(450, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Naziv:";
             // 
-            // btnEvidentiraj
+            // Evidentiraj_btn
             // 
-            this.btnEvidentiraj.Location = new System.Drawing.Point(489, 180);
-            this.btnEvidentiraj.Name = "btnEvidentiraj";
-            this.btnEvidentiraj.Size = new System.Drawing.Size(75, 23);
-            this.btnEvidentiraj.TabIndex = 2;
-            this.btnEvidentiraj.Text = "Evidentiraj";
-            this.btnEvidentiraj.UseVisualStyleBackColor = true;
-            this.btnEvidentiraj.Click += new System.EventHandler(this.btnEvidentiraj_Click);
+            this.Evidentiraj_btn.Location = new System.Drawing.Point(493, 157);
+            this.Evidentiraj_btn.Name = "Evidentiraj_btn";
+            this.Evidentiraj_btn.Size = new System.Drawing.Size(75, 23);
+            this.Evidentiraj_btn.TabIndex = 2;
+            this.Evidentiraj_btn.Text = "Evidentiraj";
+            this.Evidentiraj_btn.UseVisualStyleBackColor = true;
+            this.Evidentiraj_btn.Click += new System.EventHandler(this.btnEvidentiraj_Click);
             // 
-            // button2
+            // Obrisi_btn
             // 
-            this.button2.Location = new System.Drawing.Point(580, 180);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Obriši";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.Obrisi_btn.Location = new System.Drawing.Point(584, 157);
+            this.Obrisi_btn.Name = "Obrisi_btn";
+            this.Obrisi_btn.Size = new System.Drawing.Size(75, 23);
+            this.Obrisi_btn.TabIndex = 3;
+            this.Obrisi_btn.Text = "Obriši";
+            this.Obrisi_btn.UseVisualStyleBackColor = true;
+            this.Obrisi_btn.Click += new System.EventHandler(this.Obrisi_btn_Click);
             // 
             // txtAdresa
             // 
-            this.txtAdresa.Location = new System.Drawing.Point(489, 97);
+            this.txtAdresa.Location = new System.Drawing.Point(493, 74);
             this.txtAdresa.Name = "txtAdresa";
             this.txtAdresa.Size = new System.Drawing.Size(193, 20);
             this.txtAdresa.TabIndex = 1;
@@ -108,7 +90,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(440, 100);
+            this.label3.Location = new System.Drawing.Point(444, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 0;
@@ -116,7 +98,7 @@
             // 
             // txtTelefon
             // 
-            this.txtTelefon.Location = new System.Drawing.Point(489, 123);
+            this.txtTelefon.Location = new System.Drawing.Point(493, 100);
             this.txtTelefon.Name = "txtTelefon";
             this.txtTelefon.Size = new System.Drawing.Size(100, 20);
             this.txtTelefon.TabIndex = 1;
@@ -124,7 +106,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(437, 126);
+            this.label4.Location = new System.Drawing.Point(441, 103);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 0;
@@ -141,7 +123,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(419, 368);
             this.dataGridView1.TabIndex = 4;
-            
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // label5
             // 
@@ -162,20 +144,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(715, 425);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.btnEvidentiraj);
+            this.Controls.Add(this.Obrisi_btn);
+            this.Controls.Add(this.Evidentiraj_btn);
             this.Controls.Add(this.txtTelefon);
             this.Controls.Add(this.txtAdresa);
             this.Controls.Add(this.txtNaziv);
-            this.Controls.Add(this.txtSifra);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Evidencija_Dobavljaca";
-            this.Text = "Evidencija_Dobavljaca";
+            this.Text = "Evidencija Dobavljača";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.evidencijaDobavljacaBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -185,12 +165,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtSifra;
         private System.Windows.Forms.TextBox txtNaziv;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnEvidentiraj;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Evidentiraj_btn;
+        private System.Windows.Forms.Button Obrisi_btn;
         private System.Windows.Forms.TextBox txtAdresa;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtTelefon;

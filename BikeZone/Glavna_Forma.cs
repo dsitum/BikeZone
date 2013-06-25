@@ -49,9 +49,15 @@ namespace BikeZone
             MessageBox.Show("Tvrtka BikeZone osnovana je 2005. godine u Vinkovcima.", "BikeZone");
         }
 
-        private void EvidencijaDobavljača_Menu_Click(object sender, EventArgs e)
+        private void dodajDobavljaca_Menu_Click(object sender, EventArgs e)
         {
-            Evidencija_Dobavljaca evidencijaDobavljaca = new Evidencija_Dobavljaca();
+            Evidencija_Dobavljaca evidencijaDobavljaca = new Evidencija_Dobavljaca(true);
+            evidencijaDobavljaca.ShowDialog();
+        }
+
+        private void urediDobavljaca_Menu_Click(object sender, EventArgs e)
+        {
+            Evidencija_Dobavljaca evidencijaDobavljaca = new Evidencija_Dobavljaca(false);
             evidencijaDobavljaca.ShowDialog();
         }
 

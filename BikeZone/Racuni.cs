@@ -42,6 +42,8 @@ namespace BikeZone
                 Racuni_datagrid.Columns[0].Visible = false;
                 Racuni_datagrid.Columns[2].Visible = false;
                 Racuni_datagrid.Columns[4].Visible = false;
+                Racuni_datagrid.Columns[6].Visible = false;
+                Racuni_datagrid.Columns[7].Visible = false;
                 //zaključavamo datagrid kako bi spriječili direktne promjene u njemu (za to imamo obrazac)
                 Racuni_datagrid.ReadOnly = true;
                 //sprječavamo da korisnik selektira više redaka
