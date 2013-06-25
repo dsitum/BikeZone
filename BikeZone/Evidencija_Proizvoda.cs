@@ -201,22 +201,26 @@ namespace BikeZone
             }
             else
             {
-                string upit = string.Format("DELETE FROM" +
-                   "\"DijeloviBicikli\" WHERE \"idDijelaBicikla\"='{0}';"
-                   , dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString());
-                DB.Instance.izvrsi_upit(upit);
-
-                upit = string.Format("DELETE FROM" +
-                   "\"PopravciDijeloviBicikli\" WHERE \"id\"='{0}';"
-                   , dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString());
-                DB.Instance.izvrsi_upit(upit);
-
-                MessageBox.Show("Uspješno obrisan proizvod!");
-                selektiraj_proizvode();
-                if (Dodaj_Promijeni == true)
+                try
                 {
-                    //upisi proizvod u kontrole();
+                    string upit = string.Format("DELETE FROM" +
+                       "\"PopravciDijeloviBicikli\" WHERE \"id\"='{0}';"
+                       , dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    DB.Instance.izvrsi_upit(upit);
+
+
+                    MessageBox.Show("Uspješno obrisan proizvod!");
+                    selektiraj_proizvode();
+                    if (Dodaj_Promijeni == true)
+                    {
+                        //upisi proizvod u kontrole();
+                    }
                 }
+                catch 
+                {
+                    MessageBox.Show("Nije moguće obrisati proizvod dok se ne pobrišu sve primke i računi na kojima se on nalazi.");
+                }
+                
             }
         }
 
