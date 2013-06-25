@@ -15,12 +15,12 @@ namespace BikeZone
     {
         private bool Dodaj_Promijeni { get; set; }
 
-        public Evidencija_Klijenata(bool dodajpromijeni)
+        public Evidencija_Klijenata(bool dodajPromijeni)
         {
             InitializeComponent();
-            Dodaj_Promijeni = dodajpromijeni;
+            Dodaj_Promijeni = dodajPromijeni;
             this.CenterToParent();
-            if (dodajpromijeni == true)
+            if (dodajPromijeni == true)
             {
                 grpDodajPromijeni.Text = "Uredi klijenta";
             }

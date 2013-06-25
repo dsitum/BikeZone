@@ -32,11 +32,6 @@ namespace BikeZone
             }
         }
 
-        private void Unos_dijelova_Menu_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void DodajUslugu_Menu_Click(object sender, EventArgs e)
         {
             Evidencija_Usluga evidencijaUsluga = new Evidencija_Usluga(true);
@@ -60,36 +55,31 @@ namespace BikeZone
             evidencijaDobavljaca.ShowDialog();
         }
 
-        private void EvidencijaKupaca_Menu_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dodajToolStripMenuItem_Click(object sender, EventArgs e)
+        private void dodajZaoposlenika_Menu_Click(object sender, EventArgs e)
         {
             Evidencija_Zaposlenika evidencijaZaposlenika = new Evidencija_Zaposlenika(false, Id_zaposlenika);
             evidencijaZaposlenika.ShowDialog();
         }
 
-        private void urediToolStripMenuItem_Click(object sender, EventArgs e)
+        private void urediZaoposlenika_Menu_Click(object sender, EventArgs e)
         {
             Evidencija_Zaposlenika evidencijaZaposlenika = new Evidencija_Zaposlenika(true, Id_zaposlenika);
             evidencijaZaposlenika.ShowDialog();
         }
 
-        private void urediToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void urediProizvod_Menu_Click(object sender, EventArgs e)
         {
             Evidencija_Proizvoda evidencijaProizvoda = new Evidencija_Proizvoda(true);
             evidencijaProizvoda.ShowDialog();
         }
 
-        private void dodajToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void dodajProizvod_Menu_Click(object sender, EventArgs e)
         {
             Evidencija_Proizvoda evidencijaProizvoda = new Evidencija_Proizvoda(false);
             evidencijaProizvoda.ShowDialog();
         }
 
-        private void backupBazePodatakaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void backupBazePodataka_Menu_Click(object sender, EventArgs e)
         {
             Thread dretva = new Thread(new ThreadStart(BackupBaze));
             dretva.Start();
@@ -162,25 +152,25 @@ namespace BikeZone
             }
         }
 
-        private void dodajToolStripMenuItem2_Click(object sender, EventArgs e)
+        private void dodajKlijenta_Menu_Click(object sender, EventArgs e)
         {
             Evidencija_Klijenata evidencijaKlijenata = new Evidencija_Klijenata(false);
             evidencijaKlijenata.ShowDialog();
         }
 
-        private void urediToolStripMenuItem2_Click(object sender, EventArgs e)
+        private void urediKlijenta_Menu_Click(object sender, EventArgs e)
         {
             Evidencija_Klijenata evidencijaKlijenata = new Evidencija_Klijenata(true);
             evidencijaKlijenata.ShowDialog();
         }
 
-        private void računiToolStripMenuItem_Click(object sender, EventArgs e)
+        private void racuni_Menu_Click(object sender, EventArgs e)
         {
             Racuni racuni = new Racuni();
             racuni.ShowDialog();
         }
 
-        private void primkeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void primke_Menu_Click(object sender, EventArgs e)
         {
             Primke primka = new Primke();
             primka.ShowDialog();

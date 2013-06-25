@@ -196,7 +196,7 @@
             this.btnEvidentiraj.TabIndex = 10;
             this.btnEvidentiraj.Text = "Evidentiraj";
             this.btnEvidentiraj.UseVisualStyleBackColor = true;
-            this.btnEvidentiraj.Click += new System.EventHandler(this.button1_Click);
+            this.btnEvidentiraj.Click += new System.EventHandler(this.Evidentiraj_Click);
             // 
             // btnObrisi
             // 
@@ -206,7 +206,7 @@
             this.btnObrisi.TabIndex = 11;
             this.btnObrisi.Text = "Obriši";
             this.btnObrisi.UseVisualStyleBackColor = true;
-            this.btnObrisi.Click += new System.EventHandler(this.button2_Click);
+            this.btnObrisi.Click += new System.EventHandler(this.Obrisi_Click);
             // 
             // shapeContainer1
             // 

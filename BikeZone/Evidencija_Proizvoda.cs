@@ -90,7 +90,7 @@ namespace BikeZone
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
+        private void Evidentiraj_Click(object sender, EventArgs e)
         {
 
             #region provjeri podatke u tekstualnim okvirima
@@ -190,7 +190,7 @@ namespace BikeZone
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
+        private void Obrisi_Click(object sender, EventArgs e)
         {
             if (dataGridView1.Rows.Count == 1)
             {
