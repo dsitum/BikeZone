@@ -14,10 +14,11 @@ namespace BikeZone
 {
     public partial class Primke : Form
     {
+       
         public Primke()
         {
             InitializeComponent();
-
+            this.CenterToParent();
             UnesiPodatkeUDatagrid();
         }
 
@@ -26,11 +27,11 @@ namespace BikeZone
         /// </summary>
         private void UnesiPodatkeUDatagrid()
         {
-            string upit = "SELECT \"Primke\".\"idPrimke\", \"Primke\".datum AS \"Datum dospijeća\", \"Primke\".dobavljac, \"Dobavljaci\".\"nazivDobavljaca\" AS \"Naziv dobavljača\", \"Primke\".placeno AS \"Plaćeno\" FROM \"Primke\" JOIN \"Dobavljaci\" ON \"Primke\".dobavljac = \"Dobavljaci\".\"idDobavljaca\" ORDER BY 2";
+            string upit = "SELECT \"Primke\".\"idPrimke\", \"Primke\".datum::varchar(10) AS \"Datum dospijeća\", \"Primke\".dobavljac, \"Dobavljaci\".\"nazivDobavljaca\" AS \"Naziv dobavljača\", \"Primke\".placeno AS \"Plaćeno\" FROM \"Primke\" JOIN \"Dobavljaci\" ON \"Primke\".dobavljac = \"Dobavljaci\".\"idDobavljaca\" ORDER BY 2";
 
             using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
             {
-                DataTable dt = new DataTable();
+                System.Data.DataTable dt = new System.Data.DataTable();
                 dt.Load(dr);
                 while (dr.Read())
                 {
@@ -167,12 +168,83 @@ namespace BikeZone
         {
             if (Primke_datagrid.SelectedRows.Count == 1)
             {
-                
+                // Create the Word application and declare a document
+                Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+                Microsoft.Office.Interop.Word.Document doc = new Microsoft.Office.Interop.Word.Document();
+
+                // Define an object to pass to the API for missing parameters
+                object missing = System.Type.Missing;
+
+                int trenutna_selekcija = Primke_datagrid.CurrentCell.RowIndex;
+                object fileName = @"C:\Users\Public\Documents\Primka.docx";
+                doc = word.Documents.Open(ref fileName,
+                        ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing);
+               // MessageBox.Show(Primke_datagrid.Rows[trenutna_selekcija].Cells[4].Value.ToString());
+                // Activate the document
+                doc.Activate();
+                try
+                {
+                    object n = @"C:\Users\Public\Documents\Primka1.docx";
+                    doc.SaveAs2(n);
+
+                    missing = pretrazi_zamijeni(doc, missing,"@dat",
+                        Primke_datagrid.Rows[trenutna_selekcija].Cells[1].Value.ToString());
+
+                    if (string.Compare(Primke_datagrid.Rows[trenutna_selekcija].Cells[4].Value.ToString(), "False") == 0)
+                    {
+                        missing = pretrazi_zamijeni(doc, missing, "@dn", "NE");
+                    }
+                    else
+                    {
+                        missing = pretrazi_zamijeni(doc, missing, "@dn", "DA");
+                    }
+                    missing = pretrazi_zamijeni(doc, missing, "@naz",
+                       Primke_datagrid.Rows[trenutna_selekcija].Cells[3].Value.ToString());
+                    float ukupno = 0;
+                    //\"DijeloviBicikli\".naziv AS \"Naziv robe\", \"TipDijelaBicikla\".bicikl AS \"Bicikl\", \"StavkePrimke\".kolicina AS \"Količina\", \"StavkePrimke\".cijena AS \"Jedinična nabavna cijena\" 
+                    string sve = "Naziv robe\t\t\tKoličina\tNabavna cijena"+Environment.NewLine+Environment.NewLine;
+                    for (int i = 0; i < StavkePrimke_datagrid.Rows.Count; i++)
+                    {
+                        sve += StavkePrimke_datagrid.Rows[i].Cells[1].Value.ToString() + "\t\t\t" + StavkePrimke_datagrid.Rows[i].Cells[3].Value.ToString() +
+                            "\t\t" + StavkePrimke_datagrid.Rows[i].Cells[4].Value.ToString() + Environment.NewLine;
+                        sve += "-----------------------------------------------------------------------------"+Environment.NewLine;
+                        ukupno += float.Parse(StavkePrimke_datagrid.Rows[i].Cells[4].Value.ToString()) * float.Parse(StavkePrimke_datagrid.Rows[i].Cells[3].Value.ToString()); 
+                    }
+                    sve += Environment.NewLine + "Ukupno: " + ukupno.ToString()+Environment.NewLine;
+                    missing = pretrazi_zamijeni(doc, missing, "@sad",sve);
+                    //Prikaži dokument
+                    word.Visible = true;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
             }
             else
             {
                 MessageBox.Show("Niti jedna primka nije označena!");
             }
+        }
+
+        private static object pretrazi_zamijeni(Microsoft.Office.Interop.Word.Document doc, object missing,string zamijeni,string zamjenski)
+        {
+            foreach (Microsoft.Office.Interop.Word.Range tmpRange in doc.StoryRanges)
+            {
+                tmpRange.Find.Text = zamijeni;
+                tmpRange.Find.Replacement.Text = zamjenski;
+                tmpRange.Find.Wrap = Microsoft.Office.Interop.Word.WdFindWrap.wdFindContinue;
+                object replaceAll = Microsoft.Office.Interop.Word.WdReplace.wdReplaceAll;
+                tmpRange.Find.Execute(ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref replaceAll,
+                    ref missing, ref missing, ref missing, ref missing);
+            }
+            return missing;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace BikeZone
         public Racuni()
         {
             InitializeComponent();
-
+            this.CenterToParent();
             UnesiPodatkeUDatagrid();
         }
 
@@ -26,7 +26,7 @@ namespace BikeZone
         /// </summary>
         private void UnesiPodatkeUDatagrid()
         {
-            string upit = "SELECT \"Racuni\".\"idRacuna\", \"Racuni\".\"datumProdaje\" AS \"Datum prodaje\", \"Racuni\".kupio, \"Klijenti\".ime || ' ' || \"Klijenti\".prezime AS \"Kupac\", \"Racuni\".prodao, \"Zaposlenici\".ime || ' ' || \"Zaposlenici\".prezime AS \"Prodavač\", \"ZKI\", \"JIR\" FROM \"Racuni\" JOIN \"Klijenti\" ON \"Racuni\".kupio = \"Klijenti\".\"idKlijenta\" JOIN \"Zaposlenici\" ON \"Racuni\".prodao = \"Zaposlenici\".\"idZaposlenika\" ORDER BY 2";
+            string upit = "SELECT \"Racuni\".\"idRacuna\", \"Racuni\".\"datumProdaje\"::VARCHAR(10) AS \"Datum prodaje\", \"Racuni\".kupio, \"Klijenti\".ime || ' ' || \"Klijenti\".prezime AS \"Kupac\", \"Racuni\".prodao, \"Zaposlenici\".ime || ' ' || \"Zaposlenici\".prezime AS \"Prodavač\", \"ZKI\", \"JIR\" FROM \"Racuni\" JOIN \"Klijenti\" ON \"Racuni\".kupio = \"Klijenti\".\"idKlijenta\" JOIN \"Zaposlenici\" ON \"Racuni\".prodao = \"Zaposlenici\".\"idZaposlenika\" ORDER BY 2";
 
             using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
             {
@@ -78,7 +78,7 @@ namespace BikeZone
                 StavkeRacuna_datagrid.AllowUserToAddRows = false;
             }
         }
-
+        string sve = "";
         public static DataTable IspisiStavkeRacuna(string idSelektiranogRacuna = null)
         {
             //ako se radi o stvaranju novog računa, ispisat ćemo samo zaglavlje
@@ -90,6 +90,8 @@ namespace BikeZone
                 using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
                 {
                     dr.Read();
+                        //sve+=dr["naziv"].ToString()+"\t\t\t"+dr["kolicina"].ToString()+
+                   
                     dt.Load(dr);
                 }
                 return dt;
@@ -233,12 +235,78 @@ namespace BikeZone
         {
             if (Racuni_datagrid.SelectedRows.Count == 1)
             {
+                // Create the Word application and declare a document
+                Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+                Microsoft.Office.Interop.Word.Document doc = new Microsoft.Office.Interop.Word.Document();
 
+                // Define an object to pass to the API for missing parameters
+                object missing = System.Type.Missing;
+                
+                int trenutna_selekcija = Racuni_datagrid.CurrentCell.RowIndex;
+                object fileName = @"C:\Users\Public\Documents\Račun.docx";
+                doc = word.Documents.Open(ref fileName,
+                        ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing);
+                // MessageBox.Show(Primke_datagrid.Rows[trenutna_selekcija].Cells[4].Value.ToString());
+                // Activate the document
+                doc.Activate();
+                try
+                {
+                    object n = @"C:\Users\Public\Documents\Račun1.docx";
+                    doc.SaveAs2(n);
+
+                    missing = pretrazi_zamijeni(doc, missing, "@dat",
+                        Racuni_datagrid.Rows[trenutna_selekcija].Cells[1].Value.ToString());
+
+                  
+                    missing = pretrazi_zamijeni(doc, missing, "@naz",
+                       Racuni_datagrid.Rows[trenutna_selekcija].Cells[3].Value.ToString());
+
+                    missing = pretrazi_zamijeni(doc, missing, "@prod",
+                       Racuni_datagrid.Rows[trenutna_selekcija].Cells[5].Value.ToString());
+                    float ukupno = 0;
+                    //\"DijeloviBicikli\".naziv AS \"Naziv robe\", \"TipDijelaBicikla\".bicikl AS \"Bicikl\", \"StavkePrimke\".kolicina AS \"Količina\", \"StavkePrimke\".cijena AS \"Jedinična nabavna cijena\" 
+                    string sve = "Naziv robe\t\t\tKoličina\tNabavna cijena" + Environment.NewLine + Environment.NewLine;
+                    for (int i = 0; i < StavkeRacuna_datagrid.Rows.Count; i++)
+                    {
+                        sve += StavkeRacuna_datagrid.Rows[i].Cells[1].Value.ToString() + "\t\t\t" + StavkeRacuna_datagrid.Rows[i].Cells[3].Value.ToString() +
+                            "\t\t" + StavkeRacuna_datagrid.Rows[i].Cells[4].Value.ToString() + Environment.NewLine;
+                        sve += "-----------------------------------------------------------------------------" + Environment.NewLine;
+                        ukupno += float.Parse(StavkeRacuna_datagrid.Rows[i].Cells[4].Value.ToString()) * float.Parse(StavkeRacuna_datagrid.Rows[i].Cells[3].Value.ToString());
+                    }
+                    sve += Environment.NewLine + "Ukupno: " + ukupno.ToString() + Environment.NewLine;
+                    missing = pretrazi_zamijeni(doc, missing, "@sad", sve);
+                    //Prikaži dokument
+                    word.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    doc.Close(ref missing, ref missing, ref missing);
+                    word.Application.Quit(ref missing, ref missing, ref missing);
+                }
             }
             else
             {
                 MessageBox.Show("Niti jedan račun nije označen!");
             }
+        }
+        private static object pretrazi_zamijeni(Microsoft.Office.Interop.Word.Document doc, object missing, string zamijeni, string zamjenski)
+        {
+            foreach (Microsoft.Office.Interop.Word.Range tmpRange in doc.StoryRanges)
+            {
+                tmpRange.Find.Text = zamijeni;
+                tmpRange.Find.Replacement.Text = zamjenski;
+                tmpRange.Find.Wrap = Microsoft.Office.Interop.Word.WdFindWrap.wdFindContinue;
+                object replaceAll = Microsoft.Office.Interop.Word.WdReplace.wdReplaceAll;
+                tmpRange.Find.Execute(ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref replaceAll,
+                    ref missing, ref missing, ref missing, ref missing);
+            }
+            return missing;
         }
     }
 }
