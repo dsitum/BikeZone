@@ -13,7 +13,7 @@ namespace BikeZone
 {
     public partial class Evidencija_Dobavljaca : Form
     {
-        private bool DodajNovogDobavljaca { get; set; }
+        public bool DodajNovogDobavljaca { get; set; }
 
         public Evidencija_Dobavljaca(bool dodajNovogDobavljaca)
         {

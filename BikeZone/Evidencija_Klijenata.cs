@@ -13,7 +13,7 @@ namespace BikeZone
 {
     public partial class Evidencija_Klijenata : Form
     {
-        private bool Dodaj_Promijeni { get; set; }
+        public bool Dodaj_Promijeni { get; set; }
 
         public Evidencija_Klijenata(bool dodajPromijeni)
         {

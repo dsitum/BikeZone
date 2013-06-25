@@ -16,10 +16,16 @@ namespace BikeZone
 {
     public partial class Evidencija_Zaposlenika : Form
     {
-        private string id;
-        private bool Dodaj_Promijeni { get; set; }
+        private string id="";
+        public bool Dodaj_Promijeni { get; set; }
 
-
+        public string Id
+        {
+            get
+            {
+                return id;
+            }
+        }
         /// <summary>
         /// 
         /// </summary>

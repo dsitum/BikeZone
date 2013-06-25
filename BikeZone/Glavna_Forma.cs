@@ -19,6 +19,7 @@ namespace BikeZone
         public Glavna_Forma(int idZaposlenika)
         {
             InitializeComponent();
+            Id_zaposlenika = 0;
             Id_zaposlenika = idZaposlenika;
             this.CenterToParent();
         }

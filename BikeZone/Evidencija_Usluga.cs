@@ -14,7 +14,7 @@ namespace BikeZone
 {
     public partial class Evidencija_Usluga : Form
     {
-        private bool DodajNovuUslugu;
+        public bool DodajNovuUslugu;
 
         public Evidencija_Usluga(bool dodajNovuUslugu)
         {
