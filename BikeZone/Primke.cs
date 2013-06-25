@@ -124,12 +124,54 @@ namespace BikeZone
                 if (odgovor == DialogResult.Yes)
                 {
                     string idSelektiranogReda = Primke_datagrid.CurrentRow.Cells[0].Value.ToString();
+                    //Umanjujemo količine na skladištu za sve stavke primke koje će se obrisati
+                    UmanjiKolicinuNaSkladistu(idSelektiranogReda);
+                    //brišemo postojeću primku iz baze podataka
                     string upit = "DELETE FROM \"Primke\" WHERE \"idPrimke\" = " + idSelektiranogReda;
                     DB.Instance.izvrsi_upit(upit);
                 }
 
                 //ažuriramo datagridview s novim podacima
                 UnesiPodatkeUDatagrid();
+            }
+        }
+
+        public static void UmanjiKolicinuNaSkladistu(string idSelektiranogReda)
+        {
+            //prije nego li obrišemo primku, potrebno je količinu na skladištu smanjiti za iznose koje brišemo
+            string upit = "SELECT \"idDijelaBicikla\", kolicina FROM \"StavkePrimke\" WHERE primka = " + idSelektiranogReda;
+
+            //količine i pripadajuće ID-ove ćemo pohranjivati u 2 liste
+            List<string> idStavke = new List<string>();
+            List<string> kolicinaStavke = new List<string>();
+
+            //pronađemo sve količine stavki koje će se brisati s postojeće primke
+            using (NpgsqlDataReader dr = DB.Instance.dohvati_podatke(upit))
+            {
+                while (dr.Read())
+                {
+                    idStavke.Add(dr[0].ToString());
+                    kolicinaStavke.Add(dr[1].ToString());
+                }
+            }
+
+            //ažuriramo sve količine u bazi podataka
+            for (int i = 0; i < idStavke.Count; i++)
+            {
+                upit = string.Format("UPDATE \"DijeloviBicikli\" SET kolicina=kolicina-{0} WHERE \"idDijelaBicikla\" = {1}", kolicinaStavke[i], idStavke[i]);
+                DB.Instance.izvrsi_upit(upit);
+            }
+        }
+
+        private void IspisPrimke_btn_Click(object sender, EventArgs e)
+        {
+            if (Primke_datagrid.SelectedRows.Count == 1)
+            {
+                
+            }
+            else
+            {
+                MessageBox.Show("Niti jedna primka nije označena!");
             }
         }
     }

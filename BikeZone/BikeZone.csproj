@@ -32,6 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
@@ -41,6 +43,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -82,11 +86,23 @@
     <Compile Include="Podobrasci\Evidencija_Primke.Designer.cs">
       <DependentUpon>Evidencija_Primke.cs</DependentUpon>
     </Compile>
+    <Compile Include="Podobrasci\Evidencija_Racuna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Podobrasci\Evidencija_Racuna.Designer.cs">
+      <DependentUpon>Evidencija_Racuna.cs</DependentUpon>
+    </Compile>
     <Compile Include="Podobrasci\Evidencija_Stavke_Primke.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Podobrasci\Evidencija_Stavke_Primke.Designer.cs">
       <DependentUpon>Evidencija_Stavke_Primke.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Podobrasci\Evidencija_Stavke_Racuna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Podobrasci\Evidencija_Stavke_Racuna.Designer.cs">
+      <DependentUpon>Evidencija_Stavke_Racuna.cs</DependentUpon>
     </Compile>
     <Compile Include="Primke.cs">
       <SubType>Form</SubType>
@@ -141,8 +157,14 @@
     <EmbeddedResource Include="Podobrasci\Evidencija_Primke.resx">
       <DependentUpon>Evidencija_Primke.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Podobrasci\Evidencija_Racuna.resx">
+      <DependentUpon>Evidencija_Racuna.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Podobrasci\Evidencija_Stavke_Primke.resx">
       <DependentUpon>Evidencija_Stavke_Primke.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Podobrasci\Evidencija_Stavke_Racuna.resx">
+      <DependentUpon>Evidencija_Stavke_Racuna.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Primke.resx">
       <DependentUpon>Primke.cs</DependentUpon>
@@ -160,6 +182,9 @@
     <EmbeddedResource Include="Evidencija_Proizvoda.resx">
       <DependentUpon>Evidencija_Proizvoda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Racuni.resx">
+      <DependentUpon>Racuni.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -171,12 +196,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Freeride_02_by_adnata.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

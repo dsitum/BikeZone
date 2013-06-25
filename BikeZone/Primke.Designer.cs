@@ -128,6 +128,7 @@
             this.IspisPrimke_btn.TabIndex = 4;
             this.IspisPrimke_btn.Text = "Ispis";
             this.IspisPrimke_btn.UseVisualStyleBackColor = true;
+            this.IspisPrimke_btn.Click += new System.EventHandler(this.IspisPrimke_btn_Click);
             // 
             // Primke
             // 

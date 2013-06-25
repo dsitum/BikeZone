@@ -183,21 +183,48 @@ namespace BikeZone.Podobrasci
 
         private void EvidencijaPrimke_btn_Click(object sender, EventArgs e)
         {
-            if (DodajNovuPrimku == true)
+
+            //prvo provjeravamo imamo li duplikata u stavkama primke
+            List<string> duplikati = new List<string>();
+            bool imaDuplikata = false;
+            foreach (DataGridViewRow redak in StavkePrimke_datagrid.Rows)
             {
-                DodajPrimkuUBazu();
+                if (duplikati.IndexOf(redak.Cells[0].Value.ToString()) == -1)
+                {
+                    duplikati.Add(redak.Cells[0].Value.ToString());
+                }
+                else
+                {
+                    imaDuplikata = true;
+                }
+            }
+
+            if (imaDuplikata == true)
+            {
+                MessageBox.Show("Među stavkama primke postoje duplikati! Potrebno ih je ukloniti.");
             }
             else
             {
-                //najprije brišemo postojeću primku iz baze podataka (kaskadno se brišu i stavke primke)
-                string upit = "DELETE FROM \"Primke\" WHERE \"idPrimke\" = " + idPrimke;
-                DB.Instance.izvrsi_upit(upit);
+                duplikati.Clear();
 
-                //potom umećemo novu primku zadanu obrascem
-                DodajPrimkuUBazu();
+                if (DodajNovuPrimku == true)
+                {
+                    DodajPrimkuUBazu();
+                }
+                else
+                {
+                    //najprije smanjujemo količine na skladištu za sve stavke primke koje će se obrisati
+                    Primke.UmanjiKolicinuNaSkladistu(idPrimke);
+                    //potom brišemo postojeću primku iz baze podataka (kaskadno se brišu i stavke primke)
+                    string upit = "DELETE FROM \"Primke\" WHERE \"idPrimke\" = " + idPrimke;
+                    DB.Instance.izvrsi_upit(upit);
+
+                    //na kraju umećemo novu primku zadanu obrascem
+                    DodajPrimkuUBazu();
+                }
+
+                this.Close();
             }
-
-            this.Close();
         }
 
         private void DodajPrimkuUBazu()
@@ -224,6 +251,10 @@ namespace BikeZone.Podobrasci
                 string cijena = red.Cells["Jedinična nabavna cijena"].Value.ToString();
 
                 upit = string.Format("INSERT INTO \"StavkePrimke\" (primka, \"idDijelaBicikla\", kolicina, cijena) VALUES ({0}, {1}, {2}, {3})", idPrimke, idDijelaBicikla, kolicina, cijena);
+                DB.Instance.izvrsi_upit(upit);
+
+                //povećavamo količine određenih dijelova na skladištu
+                upit = string.Format("UPDATE \"DijeloviBicikli\" SET kolicina = kolicina + {0} WHERE \"idDijelaBicikla\" = {1}", kolicina, idDijelaBicikla);
                 DB.Instance.izvrsi_upit(upit);
             }
         }
