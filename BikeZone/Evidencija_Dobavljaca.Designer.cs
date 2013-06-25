@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSifra = new System.Windows.Forms.TextBox();
             this.txtNaziv = new System.Windows.Forms.TextBox();
@@ -40,7 +41,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
+            this.evidencijaDobavljacaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.evidencijaDobavljacaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -87,7 +90,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(570, 180);
+            this.button2.Location = new System.Drawing.Point(580, 180);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
@@ -132,6 +135,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 45);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(419, 368);
             this.dataGridView1.TabIndex = 4;
             // 
@@ -143,6 +147,10 @@
             this.label5.Size = new System.Drawing.Size(60, 13);
             this.label5.TabIndex = 0;
             this.label5.Text = "Dobavljači:";
+            // 
+            // evidencijaDobavljacaBindingSource
+            // 
+            this.evidencijaDobavljacaBindingSource.DataSource = typeof(BikeZone.Evidencija_Dobavljaca);
             // 
             // Evidencija_Dobavljaca
             // 
@@ -165,6 +173,7 @@
             this.Name = "Evidencija_Dobavljaca";
             this.Text = "Evidencija_Dobavljaca";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.evidencijaDobavljacaBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,5 +193,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.BindingSource evidencijaDobavljacaBindingSource;
     }
 }

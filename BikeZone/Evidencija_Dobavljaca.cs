@@ -19,13 +19,10 @@ namespace BikeZone
         public Evidencija_Dobavljaca()
         {
             InitializeComponent();
-            
             this.CenterToParent();
-            
-            
+                        
             selektiraj_dobavljaca();
             
-
         }
 
         private void selektiraj_dobavljaca()
@@ -91,12 +88,14 @@ namespace BikeZone
                     if (Dodaj_Promijeni == true)
                     {  
                         int indeks = dataGridView1.CurrentCell.RowIndex;
-                       /* upit = string.Format("UPDATE \"Dobavljaci\" SET idDobavljaca='{0}',nazivDobavljaca='{1}', adresa='{2}',telefon='{3}' WHERE \"idDobavljaca\"='{0}';",
+                        upit = string.Format("UPDATE \"Dobavljaci\" SET idDobavljaca='{0}',nazivDobavljaca='{1}', adresa='{2}',telefon='{3}' WHERE \"idDobavljaca\"='{0}';",
                                                txtSifra.Text, txtNaziv.Text, txtAdresa.Text, txtTelefon.Text, dataGridView1.Rows[indeks].Cells[0].Value.ToString());
-                        MessageBox.Show("Uspješno ažuriran klijent"); */
+                        MessageBox.Show("Uspješno ažuriran klijent");
+
                    }
                     else
                     {
+
                         upit = string.Format("INSERT INTO \"Dobavljaci\" VALUES ('{0}','{1}','{2}','{3}');", txtSifra.Text, txtNaziv.Text,txtAdresa.Text, txtTelefon.Text);
                         MessageBox.Show("Uspješno upisan klijent");
                     }
@@ -119,25 +118,36 @@ namespace BikeZone
 
         private void button2_Click(object sender, EventArgs e)
         {
+
             if (dataGridView1.Rows.Count == 1)
             {
-                MessageBox.Show("Ne mogu obaviti brisanje klijenta!");
+                MessageBox.Show("Ne mogu obaviti brisanje dobavljača!");
             }
-            else
+
+            
+            if (MessageBox.Show("Da li želite zaista obrisati dobavljača?", "BikeZone ", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                string upit = string.Format("DELETE FROM" +
-                    "\"Dobavljaci\" WHERE \"idDobavljaca\"='{0}';"
-                    , dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString());
-                DB.Instance.izvrsi_upit(upit);
-                MessageBox.Show("Uspješno obrisan klijent!");
-                selektiraj_dobavljaca();
-                if (Dodaj_Promijeni == true)
+                try
                 {
-                    upisi_dobavljaca_u_kontrole();
+                    string upit = string.Format("DELETE FROM" +
+                         "\"Dobavljaci\" WHERE \"idDobavljaca\"='{0}';"
+                         , dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value.ToString());
+                    DB.Instance.izvrsi_upit(upit);
+                    MessageBox.Show("Uspješno obrisan Dobavljača!");
+                    selektiraj_dobavljaca();
+                    if (Dodaj_Promijeni == true)
+                    {
+                        upisi_dobavljaca_u_kontrole();
+                    }
+                }
+            catch
+                {
+                    MessageBox.Show("Pogrešno ste odabrali!\nNe mogu obaviti brisanje dobavljača!");
                 }
             }
+                            
+                                  
         }
-
-
-    }
+            
+      }
 }
